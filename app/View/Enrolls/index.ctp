@@ -1,3 +1,6 @@
+<?php
+    debug($enrolls);
+?>
 <div class="enrolls index">
 	<h2><?php echo __('Enrolls'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
