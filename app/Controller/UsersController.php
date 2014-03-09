@@ -108,20 +108,56 @@ class UsersController extends AppController {
         }
         return $this->redirect(array('action' => 'index'));
     }
-        
-//    public function login()
-//    {
-//        if ($this->request->is('post')) {
-//            if ($this->Auth->login()) {
-//                return $this->redirect($this->Auth->redirect());
-//            }
-//            $this->Session->setFlash(__('Invalid username or password, try again'));
-//        }
-//    }
     
-//    public function logout()
-//    {
-//        return $this->redirect($this->Auth->logout());
-//    }
-        
+    // Placeholder for login_form, required by CakePHP to see the login_form view
+    function login_form() { }
+ 
+    function login() {
+        //echo 'lol1';
+        //echo $this->data['User']['uid'];
+        //print_r($this->data);
+        // Check if they went here after submitting the form
+        // Note that all our form data is preceded by the model name ['User']
+        if(empty($this->data['User']['uid']) == false && empty($this->data['User']['pswd']) == FALSE)
+        {
+            //echo 'lol2';
+            // Here we validate the user by calling that method from the User model
+            if(($user = $this->User->validateLogin($this->data['User'])) != false)
+            {
+                // Write some Session variables and redirect to our next page!
+                //$this->Session->setFlash('Logged IN');
+                $this->Session->write('User', $user);
+                
+                //echo 'lol3';
+                //print_r($user);
+ 
+                // Go to our first destination!
+                //$this->Redirect(array('controller' => 'Enrolls', 'action' => 'viewLectCourse', 99901));
+                
+                if($user['role'] == '2')
+                {
+                    $this->Redirect(array('controller' => 'Enrolls', 'action' => 'viewLectCourse', $user['id']));
+                }
+                
+                exit();
+            }
+            else
+            {
+                $this->Session->setFlash('Incorrect username/password!');
+                $this->Redirect(array('action' => 'login_form'));
+                exit();
+            }
+        }
+    }
+ 
+    function logout() {
+ 
+        $this->Session->destroy();
+        $this->Session->setFlash('You have been logged out!');
+ 
+        // Go home!
+        $this->Redirect('/');
+        exit();
+    }
+     
 }

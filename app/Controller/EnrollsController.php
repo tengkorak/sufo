@@ -114,8 +114,9 @@ class EnrollsController extends AppController {
         
         public function viewLectCourse($id = NULL)
         {
-            $id = 99901;
-            $query = "SELECT en.name, c.code, c.name, sem.startmonth, sem.startyear, sem.endmonth, sem.endyear, en.id, c.id, sem.id
+            //Temporary ID/Testing ID
+            //$id = 99901;
+            $query = "SELECT en.name, c.code, c.name, sem.startmonth, sem.startyear, sem.endmonth, sem.endyear, en.id, c.id, sem.id, usr.fname
                         FROM enrolls en, courses c, users usr, semesters sem
                         WHERE usr.id = en.user_id
                         AND c.id = en.course_id
@@ -178,7 +179,7 @@ class EnrollsController extends AppController {
             }
             else
             {
-                $avg = 0.0;
+                $avg = 0.00;
             }
             
             return CakeNumber::precision($avg, 2);

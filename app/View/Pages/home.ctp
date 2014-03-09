@@ -14,4 +14,5 @@ endif;
 App::uses('Debugger', 'Utility');
 ?>
 
-<?php echo $this->Html->link('Lecturer', array('controller' => 'enrolls', 'action' => 'viewLectCourse', 231999)); ?>
+<?php echo $this->Html->link('Login', array('controller' => 'Users', 'action' => 'login_form')); ?> <br/>
+<?php echo $this->Html->link('Test_Lecturer', array('controller' => 'enrolls', 'action' => 'viewLectCourse', 99901)); ?>
