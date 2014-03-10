@@ -26,6 +26,11 @@ class EnrollsController extends AppController {
 		$this->set('enrolls', $this->Paginator->paginate());
 	}
 
+		public function studindex()
+        {
+            $this->Enroll->recursive = 0;
+		$this->set('enrolls', $this->Paginator->paginate());            
+        }     
 /**
  * view method
  *
@@ -115,5 +120,7 @@ class EnrollsController extends AppController {
         {
             
         }
+
+		   
         
  }

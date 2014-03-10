@@ -28,4 +28,8 @@ App::uses('Debugger', 'Utility');
     <?php //echo $this->Form->end(__('Login')); ?>
 </div>-->
 
-<?php echo $this->Html->link('Lecturer', array('controller' => 'enroll', 'action' => 'viewLectCourse', 231999)); ?>
+<?php echo $this->Html->link('Student', array('controller' => 'enrolls', 'action' =>'studindex')); ?>
+<br/>
+<?php echo $this->Html->link('Lecturer', array('controller' => 'enrolls')); ?>
+<br/>
+<?php echo $this->Html->link('radiotest' , array('controller' => 'pages', 'action' =>'testradio')); 

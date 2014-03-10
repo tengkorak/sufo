@@ -26,6 +26,11 @@ class QuestionsController extends AppController {
 		$this->set('questions', $this->Paginator->paginate());
 	}
 
+	public function ques() {
+		$this->Question->recursive = 0;
+		$this->set('questions', $this->Paginator->paginate());
+	}
+
 /**
  * view method
  *
