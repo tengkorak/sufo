@@ -5,7 +5,6 @@ App::uses('AppController', 'Controller');
  *
  * @property Score $Score
  * @property PaginatorComponent $Paginator
- * @property SessionComponent $Session
  */
 class ScoresController extends AppController {
 
@@ -14,7 +13,7 @@ class ScoresController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session');
+	public $components = array('Paginator');
 
 /**
  * index method
@@ -56,8 +55,8 @@ class ScoresController extends AppController {
 				$this->Session->setFlash(__('The score could not be saved. Please, try again.'));
 			}
 		}
-		$enrolls = $this->Score->Enroll->find('list');
-		$this->set(compact('enrolls'));
+		$surveys = $this->Score->Survey->find('list');
+		$this->set(compact('surveys'));
 	}
 
 /**
@@ -82,8 +81,8 @@ class ScoresController extends AppController {
 			$options = array('conditions' => array('Score.' . $this->Score->primaryKey => $id));
 			$this->request->data = $this->Score->find('first', $options);
 		}
-		$enrolls = $this->Score->Enroll->find('list');
-		$this->set(compact('enrolls'));
+		$surveys = $this->Score->Survey->find('list');
+		$this->set(compact('surveys'));
 	}
 
 /**

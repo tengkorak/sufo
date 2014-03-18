@@ -5,7 +5,6 @@ App::uses('AppController', 'Controller');
  *
  * @property User $User
  * @property PaginatorComponent $Paginator
- * @property SessionComponent $Session
  */
 class UsersController extends AppController {
 
@@ -14,17 +13,17 @@ class UsersController extends AppController {
  *
  * @var array
  */
-    public $components = array('Paginator', 'Session');
+	public $components = array('Paginator');
 
 /**
  * index method
  *
  * @return void
  */
-    public function index() {
-        $this->User->recursive = 0;
-        $this->set('users', $this->Paginator->paginate());
-    }
+	public function index() {
+		$this->User->recursive = 0;
+		$this->set('users', $this->Paginator->paginate());
+	}
 
 /**
  * view method
@@ -33,34 +32,34 @@ class UsersController extends AppController {
  * @param string $id
  * @return void
  */
-    public function view($id = null) {
-        if (!$this->User->exists($id)) {
-            throw new NotFoundException(__('Invalid user'));
-        }
-        //bole pkai read je!
-        $lol = $this->User->read(NULL, $id);
-        //$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
-        $this->set('user', $this->User->find('first', $lol));
-    }
+	public function view($id = null) {
+		if (!$this->User->exists($id)) {
+			throw new NotFoundException(__('Invalid user'));
+		}
+		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
+		$this->set('user', $this->User->find('first', $options));
+	}
 
 /**
  * add method
  *
  * @return void
  */
-    public function add() {
-        if ($this->request->is('post')) {
-            $this->User->create();
-            if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__('The user has been saved.'));
-                return $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
-            }
-        }
-        $faculties = $this->User->Faculty->find('list');
-        $this->set(compact('faculties'));
-    }
+	public function add() {
+		if ($this->request->is('post')) {
+			$this->User->create();
+			if ($this->User->save($this->request->data)) {
+				$this->Session->setFlash(__('The user has been saved.'));
+				return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+			}
+		}
+		$faculties = $this->User->Faculty->find('list');
+		$courses = $this->User->Course->find('list');
+		$groups = $this->User->Group->find('list');
+		$this->set(compact('faculties', 'courses', 'groups'));
+	}
 
 /**
  * edit method
@@ -69,24 +68,26 @@ class UsersController extends AppController {
  * @param string $id
  * @return void
  */
-    public function edit($id = null) {
-        if (!$this->User->exists($id)) {
-            throw new NotFoundException(__('Invalid user'));
-        }
-        if ($this->request->is(array('post', 'put'))) {
-            if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__('The user has been saved.'));
-                return $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
-            }
-        } else {
-            $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
-            $this->request->data = $this->User->find('first', $options);
-        }
-        $faculties = $this->User->Faculty->find('list');
-        $this->set(compact('faculties'));
-    }
+	public function edit($id = null) {
+		if (!$this->User->exists($id)) {
+			throw new NotFoundException(__('Invalid user'));
+		}
+		if ($this->request->is(array('post', 'put'))) {
+			if ($this->User->save($this->request->data)) {
+				$this->Session->setFlash(__('The user has been saved.'));
+				return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+			}
+		} else {
+			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
+			$this->request->data = $this->User->find('first', $options);
+		}
+		$faculties = $this->User->Faculty->find('list');
+		$courses = $this->User->Course->find('list');
+		$groups = $this->User->Group->find('list');
+		$this->set(compact('faculties', 'courses', 'groups'));
+	}
 
 /**
  * delete method
@@ -95,21 +96,21 @@ class UsersController extends AppController {
  * @param string $id
  * @return void
  */
-    public function delete($id = null) {
-        $this->User->id = $id;
-        if (!$this->User->exists()) {
-            throw new NotFoundException(__('Invalid user'));
-        }
-        $this->request->onlyAllow('post', 'delete');
-        if ($this->User->delete()) {
-            $this->Session->setFlash(__('The user has been deleted.'));
-        } else {
-            $this->Session->setFlash(__('The user could not be deleted. Please, try again.'));
-        }
-        return $this->redirect(array('action' => 'index'));
-    }
-    
-    // Placeholder for login_form, required by CakePHP to see the login_form view
+	public function delete($id = null) {
+		$this->User->id = $id;
+		if (!$this->User->exists()) {
+			throw new NotFoundException(__('Invalid user'));
+		}
+		$this->request->onlyAllow('post', 'delete');
+		if ($this->User->delete()) {
+			$this->Session->setFlash(__('The user has been deleted.'));
+		} else {
+			$this->Session->setFlash(__('The user could not be deleted. Please, try again.'));
+		}
+		return $this->redirect(array('action' => 'index'));
+	}
+        
+        // Placeholder for login_form, required by CakePHP to see the login_form view
     function login_form() { }
  
     function login() {
@@ -133,10 +134,17 @@ class UsersController extends AppController {
  
                 // Go to our first destination!
                 //$this->Redirect(array('controller' => 'Enrolls', 'action' => 'viewLectCourse', 99901));
-                
-                if($user['role'] == '2')
+                if($user['role'] == '1')
                 {
-                    $this->Redirect(array('controller' => 'Enrolls', 'action' => 'viewLectCourse', $user['id']));
+                    $this->redirect(array('controller'=> 'Users', 'action'=> 'adminViewAllLect'));
+                }
+                else if($user['role'] == '2')
+                {
+                    $this->Redirect(array('controller' => 'CoursesUsers', 'action' => 'lectViewCourse', $user['uid']));
+                }
+                else if($user['role'] == '3')
+                {
+                    //student redirect link
                 }
                 
                 exit();
@@ -150,14 +158,28 @@ class UsersController extends AppController {
         }
     }
  
-    function logout() {
- 
+    function logout()
+    {
         $this->Session->destroy();
-        $this->Session->setFlash('You have been logged out!');
- 
+        //$this->Session->setFlash('You have been logged out!');
         // Go home!
         $this->Redirect('/');
         exit();
     }
-     
+    
+    public function adminViewAllLect()
+    {
+        $query = "SELECT DISTINCT usr.fname, c.code as courseCode, c.name as courseName, grp.name as grpName
+                    FROM users usr, courses c, groups grp, surveys svy, courses_users cusr
+                    WHERE usr.id = cusr.user_id
+                    AND c.id = cusr.course_id
+                    AND c.id = grp.course_id
+                    AND c.id = svy.course_id
+                    AND grp.id = svy.group_id
+                    AND usr.role = '2'
+                    ORDER BY usr.fname, c.code";
+        
+        $datas = $this->User->query($query);
+        $this->set('datas', $datas);
+    }
 }

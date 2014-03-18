@@ -3,7 +3,7 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('enroll_id'); ?></th>
+			<th><?php echo $this->Paginator->sort('survey_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('question_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('ans'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
@@ -12,7 +12,7 @@
 	<tr>
 		<td><?php echo h($answers2['Answers2']['id']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($answers2['Enroll']['name'], array('controller' => 'enrolls', 'action' => 'view', $answers2['Enroll']['id'])); ?>
+			<?php echo $this->Html->link($answers2['Survey']['id'], array('controller' => 'surveys', 'action' => 'view', $answers2['Survey']['id'])); ?>
 		</td>
 		<td>
 			<?php echo $this->Html->link($answers2['Question']['id'], array('controller' => 'questions', 'action' => 'view', $answers2['Question']['id'])); ?>
@@ -44,8 +44,8 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('New Answers2'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Enrolls'), array('controller' => 'enrolls', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Enroll'), array('controller' => 'enrolls', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Surveys'), array('controller' => 'surveys', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Survey'), array('controller' => 'surveys', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Questions'), array('controller' => 'questions', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Question'), array('controller' => 'questions', 'action' => 'add')); ?> </li>
 	</ul>

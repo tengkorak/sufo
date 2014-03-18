@@ -3,11 +3,38 @@ App::uses('AppModel', 'Model');
 /**
  * Answers2 Model
  *
- * @property Enroll $Enroll
+ * @property Survey $Survey
  * @property Question $Question
  */
 class Answers2 extends AppModel {
 
+/**
+ * Validation rules
+ *
+ * @var array
+ */
+	public $validate = array(
+		'survey_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'question_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
@@ -17,9 +44,9 @@ class Answers2 extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Enroll' => array(
-			'className' => 'Enroll',
-			'foreignKey' => 'enroll_id',
+		'Survey' => array(
+			'className' => 'Survey',
+			'foreignKey' => 'survey_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

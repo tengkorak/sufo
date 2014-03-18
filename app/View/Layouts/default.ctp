@@ -16,8 +16,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-//$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
-$cakeDescription = "SuFO";
+$cakeDescription = __d('cake_dev', 'SuFO');
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,6 +39,12 @@ $cakeDescription = "SuFO";
 <body>
 	<div id="container">
 		<div id="header">
+                    <?php
+                        if($this->Session->check('user') == TRUE)
+                        {
+                             echo $this->Html->link('Logout', array('controller'=> 'Users', 'action'=> 'logout'));
+                        }
+                  ?>
 			<h1><?php echo $cakeDescription; ?></h1>
 		</div>
 		<div id="content">

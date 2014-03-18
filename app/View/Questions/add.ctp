@@ -3,7 +3,6 @@
 	<fieldset>
 		<legend><?php echo __('Add Question'); ?></legend>
 	<?php
-		echo $this->Form->input('no');
 		echo $this->Form->input('ques');
 	?>
 	</fieldset>

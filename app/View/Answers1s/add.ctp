@@ -3,7 +3,7 @@
 	<fieldset>
 		<legend><?php echo __('Add Answers1'); ?></legend>
 	<?php
-		echo $this->Form->input('enroll_id');
+		echo $this->Form->input('survey_id');
 		echo $this->Form->input('question_id');
 		echo $this->Form->input('ans');
 	?>
@@ -15,8 +15,8 @@
 	<ul>
 
 		<li><?php echo $this->Html->link(__('List Answers1s'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Enrolls'), array('controller' => 'enrolls', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Enroll'), array('controller' => 'enrolls', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Surveys'), array('controller' => 'surveys', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Survey'), array('controller' => 'surveys', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Questions'), array('controller' => 'questions', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Question'), array('controller' => 'questions', 'action' => 'add')); ?> </li>
 	</ul>

@@ -5,7 +5,6 @@ App::uses('AppController', 'Controller');
  *
  * @property Semester $Semester
  * @property PaginatorComponent $Paginator
- * @property SessionComponent $Session
  */
 class SemestersController extends AppController {
 
@@ -14,7 +13,7 @@ class SemestersController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session');
+	public $components = array('Paginator');
 
 /**
  * index method
@@ -49,9 +48,10 @@ class SemestersController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Semester->create();
+                        print_r($this->request->data);
 			if ($this->Semester->save($this->request->data)) {
 				$this->Session->setFlash(__('The semester has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				//return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The semester could not be saved. Please, try again.'));
 			}
@@ -101,4 +101,22 @@ class SemestersController extends AppController {
 			$this->Session->setFlash(__('The semester could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
-	}}
+	}
+        
+        public function getFullSemName($semID = NULL)
+        {
+            $query = "SELECT startmonth, startyear, endmonth, endyear
+                    FROM semesters
+                    where id = '".$semID."'";
+            
+            $data = $this->Semester->query($query);
+            
+            return $data[0]['semesters']['startmonth']." ".$data[0]['semesters']['startyear']." - ".$data[0]['semesters']['endmonth']." ".$data[0]['semesters']['endyear'];
+        }
+        
+        public function addNewSem()
+        {
+            echo $_POST['addNewSem'];
+            echo $_POST['startmonth'];
+        }
+  }

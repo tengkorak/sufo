@@ -5,7 +5,6 @@ App::uses('AppController', 'Controller');
  *
  * @property Answers2 $Answers2
  * @property PaginatorComponent $Paginator
- * @property SessionComponent $Session
  */
 class Answers2sController extends AppController {
 
@@ -14,7 +13,7 @@ class Answers2sController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session');
+	public $components = array('Paginator');
 
 /**
  * index method
@@ -56,9 +55,9 @@ class Answers2sController extends AppController {
 				$this->Session->setFlash(__('The answers2 could not be saved. Please, try again.'));
 			}
 		}
-		$enrolls = $this->Answers2->Enroll->find('list');
+		$surveys = $this->Answers2->Survey->find('list');
 		$questions = $this->Answers2->Question->find('list');
-		$this->set(compact('enrolls', 'questions'));
+		$this->set(compact('surveys', 'questions'));
 	}
 
 /**
@@ -83,9 +82,9 @@ class Answers2sController extends AppController {
 			$options = array('conditions' => array('Answers2.' . $this->Answers2->primaryKey => $id));
 			$this->request->data = $this->Answers2->find('first', $options);
 		}
-		$enrolls = $this->Answers2->Enroll->find('list');
+		$surveys = $this->Answers2->Survey->find('list');
 		$questions = $this->Answers2->Question->find('list');
-		$this->set(compact('enrolls', 'questions'));
+		$this->set(compact('surveys', 'questions'));
 	}
 
 /**
