@@ -4,8 +4,8 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('faculty_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('name'); ?></th>
 			<th><?php echo $this->Paginator->sort('code'); ?></th>
+			<th><?php echo $this->Paginator->sort('name'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($programs as $program): ?>
@@ -14,8 +14,8 @@
 		<td>
 			<?php echo $this->Html->link($program['Faculty']['name'], array('controller' => 'faculties', 'action' => 'view', $program['Faculty']['id'])); ?>
 		</td>
-		<td><?php echo h($program['Program']['name']); ?>&nbsp;</td>
 		<td><?php echo h($program['Program']['code']); ?>&nbsp;</td>
+		<td><?php echo h($program['Program']['name']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $program['Program']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $program['Program']['id'])); ?>

@@ -4,7 +4,6 @@
 		<legend><?php echo __('Edit Question'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
-		echo $this->Form->input('no');
 		echo $this->Form->input('ques');
 	?>
 	</fieldset>

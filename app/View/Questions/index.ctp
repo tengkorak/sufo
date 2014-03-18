@@ -3,14 +3,12 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('no'); ?></th>
 			<th><?php echo $this->Paginator->sort('ques'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($questions as $question): ?>
 	<tr>
 		<td><?php echo h($question['Question']['id']); ?>&nbsp;</td>
-		<td><?php echo h($question['Question']['no']); ?>&nbsp;</td>
 		<td><?php echo h($question['Question']['ques']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $question['Question']['id'])); ?>

@@ -11,14 +11,14 @@
 			<?php echo $this->Html->link($program['Faculty']['name'], array('controller' => 'faculties', 'action' => 'view', $program['Faculty']['id'])); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Name'); ?></dt>
-		<dd>
-			<?php echo h($program['Program']['name']); ?>
-			&nbsp;
-		</dd>
 		<dt><?php echo __('Code'); ?></dt>
 		<dd>
 			<?php echo h($program['Program']['code']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Name'); ?></dt>
+		<dd>
+			<?php echo h($program['Program']['name']); ?>
 			&nbsp;
 		</dd>
 	</dl>

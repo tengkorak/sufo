@@ -5,7 +5,6 @@ App::uses('AppController', 'Controller');
  *
  * @property Course $Course
  * @property PaginatorComponent $Paginator
- * @property SessionComponent $Session
  */
 class CoursesController extends AppController {
 
@@ -14,7 +13,7 @@ class CoursesController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session');
+	public $components = array('Paginator');
 
 /**
  * index method
@@ -57,7 +56,8 @@ class CoursesController extends AppController {
 			}
 		}
 		$programs = $this->Course->Program->find('list');
-		$this->set(compact('programs'));
+		$users = $this->Course->User->find('list');
+		$this->set(compact('programs', 'users'));
 	}
 
 /**
@@ -83,7 +83,8 @@ class CoursesController extends AppController {
 			$this->request->data = $this->Course->find('first', $options);
 		}
 		$programs = $this->Course->Program->find('list');
-		$this->set(compact('programs'));
+		$users = $this->Course->User->find('list');
+		$this->set(compact('programs', 'users'));
 	}
 
 /**

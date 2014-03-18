@@ -5,7 +5,6 @@ App::uses('AppController', 'Controller');
  *
  * @property Question $Question
  * @property PaginatorComponent $Paginator
- * @property SessionComponent $Session
  */
 class QuestionsController extends AppController {
 
@@ -14,7 +13,7 @@ class QuestionsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session');
+	public $components = array('Paginator');
 
 /**
  * index method
@@ -26,10 +25,33 @@ class QuestionsController extends AppController {
 		$this->set('questions', $this->Paginator->paginate());
 	}
 
-	public function ques() {
-		$this->Question->recursive = 0;
-		$this->set('questions', $this->Paginator->paginate());
-	}
+	public function std_view_questions()
+        {
+            $query = "SELECT id, ques
+                        FROM questions";
+            
+            $questions = $this->Question->query($query);
+            
+            //debug($questions);
+            $qA1 = array();
+            $qA2 = array();
+            for($i = 0; $i <= 26; $i++)
+            {
+                if($i <= 24)
+                {
+                    array_push($qA1, $questions[$i]);
+                }
+                else
+                {
+                    array_push($qA2, $questions[$i]);
+                }
+                
+            }
+            
+            //print_r($qA2);
+            $this->set(array('qA1'=> $qA1, 'qA2'=> $qA2));
+            
+        }
 
 /**
  * view method
@@ -106,4 +128,6 @@ class QuestionsController extends AppController {
 			$this->Session->setFlash(__('The question could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
-	}}
+	}
+
+}

@@ -3,7 +3,7 @@ App::uses('AppModel', 'Model');
 /**
  * Semester Model
  *
- * @property Enroll $Enroll
+ * @property Survey $Survey
  */
 class Semester extends AppModel {
 
@@ -16,8 +16,8 @@ class Semester extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'Enroll' => array(
-			'className' => 'Enroll',
+		'Survey' => array(
+			'className' => 'Survey',
 			'foreignKey' => 'semester_id',
 			'dependent' => false,
 			'conditions' => '',

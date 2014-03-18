@@ -6,9 +6,9 @@
 			<?php echo h($answers2['Answers2']['id']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Enroll'); ?></dt>
+		<dt><?php echo __('Survey'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($answers2['Enroll']['name'], array('controller' => 'enrolls', 'action' => 'view', $answers2['Enroll']['id'])); ?>
+			<?php echo $this->Html->link($answers2['Survey']['id'], array('controller' => 'surveys', 'action' => 'view', $answers2['Survey']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Question'); ?></dt>
@@ -30,8 +30,8 @@
 		<li><?php echo $this->Form->postLink(__('Delete Answers2'), array('action' => 'delete', $answers2['Answers2']['id']), null, __('Are you sure you want to delete # %s?', $answers2['Answers2']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('List Answers2s'), array('action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Answers2'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Enrolls'), array('controller' => 'enrolls', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Enroll'), array('controller' => 'enrolls', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Surveys'), array('controller' => 'surveys', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Survey'), array('controller' => 'surveys', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Questions'), array('controller' => 'questions', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Question'), array('controller' => 'questions', 'action' => 'add')); ?> </li>
 	</ul>

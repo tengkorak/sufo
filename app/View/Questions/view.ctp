@@ -6,11 +6,6 @@
 			<?php echo h($question['Question']['id']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('No'); ?></dt>
-		<dd>
-			<?php echo h($question['Question']['no']); ?>
-			&nbsp;
-		</dd>
 		<dt><?php echo __('Ques'); ?></dt>
 		<dd>
 			<?php echo h($question['Question']['ques']); ?>
@@ -37,7 +32,7 @@
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Enroll Id'); ?></th>
+		<th><?php echo __('Survey Id'); ?></th>
 		<th><?php echo __('Question Id'); ?></th>
 		<th><?php echo __('Ans'); ?></th>
 		<th class="actions"><?php echo __('Actions'); ?></th>
@@ -45,7 +40,7 @@
 	<?php foreach ($question['Answers1'] as $answers1): ?>
 		<tr>
 			<td><?php echo $answers1['id']; ?></td>
-			<td><?php echo $answers1['enroll_id']; ?></td>
+			<td><?php echo $answers1['survey_id']; ?></td>
 			<td><?php echo $answers1['question_id']; ?></td>
 			<td><?php echo $answers1['ans']; ?></td>
 			<td class="actions">
@@ -70,7 +65,7 @@
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Enroll Id'); ?></th>
+		<th><?php echo __('Survey Id'); ?></th>
 		<th><?php echo __('Question Id'); ?></th>
 		<th><?php echo __('Ans'); ?></th>
 		<th class="actions"><?php echo __('Actions'); ?></th>
@@ -78,7 +73,7 @@
 	<?php foreach ($question['Answers2'] as $answers2): ?>
 		<tr>
 			<td><?php echo $answers2['id']; ?></td>
-			<td><?php echo $answers2['enroll_id']; ?></td>
+			<td><?php echo $answers2['survey_id']; ?></td>
 			<td><?php echo $answers2['question_id']; ?></td>
 			<td><?php echo $answers2['ans']; ?></td>
 			<td class="actions">

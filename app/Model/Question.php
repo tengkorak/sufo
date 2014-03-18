@@ -8,7 +8,15 @@ App::uses('AppModel', 'Model');
  */
 class Question extends AppModel {
 
-
+var $name = 'Question';
+var $validate = array(
+	'survey' => array(
+		'survey_must_not_be_blank'=>array(
+		'rule' => 'notEmpty',
+		'message' =>'There is/are unanswered question(s)' 
+		) 
+	  )
+	);
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
