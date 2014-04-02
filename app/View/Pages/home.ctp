@@ -28,4 +28,5 @@ App::uses('Debugger', 'Utility');
     <?php //echo $this->Form->end(__('Login')); ?>
 </div>-->
 
+<?php echo $this->Html->link('Login', array('controller' => 'users', 'action' =>'login_form')); ?><br/>
 <?php echo $this->Html->link('Student', array('controller' => 'surveys', 'action' =>'studindex')); ?><br/>

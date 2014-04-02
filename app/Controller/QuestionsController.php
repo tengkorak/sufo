@@ -1,5 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
+App::import('Controller', 'Answers1s', 'Answers2s');
 /**
  * Questions Controller
  *
@@ -25,13 +26,14 @@ class QuestionsController extends AppController {
 		$this->set('questions', $this->Paginator->paginate());
 	}
 
-	public function std_view_questions()
+	public function std_view_questions($cID = NULL, $grpID = NULL, $svyID = NULL)
         {
             $query = "SELECT id, ques
                         FROM questions";
             
             $questions = $this->Question->query($query);
             
+            $svData = array('cID'=> $cID, 'grpID'=> $grpID, 'svyID'=> $svyID);
             //debug($questions);
             $qA1 = array();
             $qA2 = array();
@@ -49,7 +51,7 @@ class QuestionsController extends AppController {
             }
             
             //print_r($qA2);
-            $this->set(array('qA1'=> $qA1, 'qA2'=> $qA2));
+            $this->set(array('qA1'=> $qA1, 'qA2'=> $qA2, 'svData'=> $svData));
             
         }
 
