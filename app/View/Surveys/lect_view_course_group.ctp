@@ -1,3 +1,4 @@
+<?php print_r($uiData); ?>
 <div class="surveys lectviewcoursegroup">
     
     <?php 
@@ -14,13 +15,20 @@
 	<tr>
             <th>Course Group</th>
             <th>Semesters</th>
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+            <th>D</th>
 	</tr>
-	<?php foreach ($datas as $data): ?>
+	<?php foreach ($uiData as $data): ?>
 	<tr>
             
-            <td><?php echo $this->HTML->link($data['grp']['name'], array('controller'=> 'Surveys', 'action'=> 'lectViewGroupScore', $data['c']['id'], $data['grp']['id'], $data['sem']['id'])) ;?></td>
-            <td><?php echo $data['sem']['startmonth']." ".$data['sem']['startyear']." - ".$data['sem']['endmonth']." ".$data['sem']['endyear']; ?></td>
-            
+            <td><?php echo $this->HTML->link($data['grpName'], array('controller'=> 'Surveys', 'action'=> 'lectViewGroupScore', $data['cID'], $data['grpID'], $data['semID'])) ;?></td>
+            <td><?php echo $data['semStartMon']." ".$data['semStartYear']." - ".$data['semEndMon']." ".$data['semEndYear']; ?></td>
+            <td><?php echo $data['avgPartA']; ?></td>
+            <td><?php echo $data['avgPartB']; ?></td>
+            <td><?php echo $data['avgPartC']; ?></td>
+            <td><?php echo $data['avgPartD']; ?></td>
 	</tr>
         
         <?php endforeach; ?>

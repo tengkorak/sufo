@@ -128,8 +128,72 @@ class SurveysController extends AppController {
                         ORDER BY grp.name";
             
             $datas = $this->Survey->query($query);
-            print_r($datas);
-            $this->set('datas', $datas);
+            //print_r($datas);
+            
+            $uiData = array();
+            $TotalAvgPartA = 0;
+            $TotalAvgPartB = 0;
+            $TotalAvgPartC = 0;
+            $TotalAvgPartD = 0;
+            
+            for($i = 0; $i < count($datas); $i++)
+            {   
+                for($j = 1; $j <= 25; $j++)
+                {
+                    $totalVal1 = $this->countAns($datas[$i]['c']['id'], $datas[$i]['grp']['id'], $datas[$i]['sem']['id'], $j, 1);
+                    $totalVal2 = $this->countAns($datas[$i]['c']['id'], $datas[$i]['grp']['id'], $datas[$i]['sem']['id'], $j, 2);
+                    $totalVal3 = $this->countAns($datas[$i]['c']['id'], $datas[$i]['grp']['id'], $datas[$i]['sem']['id'], $j, 3);
+                    $totalVal4 = $this->countAns($datas[$i]['c']['id'], $datas[$i]['grp']['id'], $datas[$i]['sem']['id'], $j, 4);
+
+                    $avg = $this->averageCounter($totalVal1, $totalVal2, $totalVal3, $totalVal4);
+
+                    if($i <= 3)
+                    {
+                        $TotalAvgPartA = $TotalAvgPartA + $avg;
+                    }
+                    else if($i <= 12)
+                    {
+                        $TotalAvgPartB = $TotalAvgPartB + $avg;
+                    }
+                    else if($i <= 23)
+                    {
+                        $TotalAvgPartC = $TotalAvgPartC + $avg;
+                    }
+                    else if($i <= 25)
+                    {
+                        $TotalAvgPartD = $TotalAvgPartD + $avg;
+                    }
+
+                    $avgPartA = $TotalAvgPartA / 3;
+                    $avgPartB = $TotalAvgPartB / 9;
+                    $avgPartC = $TotalAvgPartC / 11;
+                    $avgPartD = $TotalAvgPartD / 2;
+
+                    $avgPartA = CakeNumber::precision($avgPartA, 2);
+                    $avgPartB = CakeNumber::precision($avgPartB, 2);
+                    $avgPartC = CakeNumber::precision($avgPartC, 2);
+                    $avgPartD = CakeNumber::precision($avgPartD, 2);
+                }
+                
+                
+                $viewData = array('grpName'=>$datas[$i]['grp']['name'],
+                                    'semStartMon'=> $datas[$i]['sem']['startmonth'],
+                                    'semStartYear'=> $datas[$i]['sem']['startyear'],
+                                    'semEndMon'=> $datas[$i]['sem']['endmonth'],
+                                    'semEndYear'=> $datas[$i]['sem']['endyear'],
+                                    'avgPartA'=> $avgPartA,
+                                    'avgPartB'=> $avgPartB,
+                                    'avgPartC'=> $avgPartC,
+                                    'avgPartD'=> $avgPartD,
+                                    'cID'=> $datas[$i]['c']['id'],
+                                    'grpID'=> $datas[$i]['grp']['id'],
+                                    'semID'=> $datas[$i]['sem']['id']
+                                );
+                
+                array_push($uiData, $viewData);
+            }
+            
+            $this->set('uiData', $uiData);
         }
         
         public function countAns($courseID = NULL, $grpID = NULL, $semID = NULL, $qNum = NULL, $ansVal = NULL)
@@ -238,6 +302,73 @@ class SurveysController extends AppController {
         public function submitSurvey()
         {
             print_r($this->request->data);
+        }
+        
+        public function adminViewGroupScore($courseID = NULL, $grpID = NULL, $semID = NULL)
+        {
+            $scoresArray = array();
+            $otherInfo = array();
+            $QuestionController = new QuestionsController();
+            $CoursesController = new CoursesController();
+            $GroupController =  new GroupsController();
+            $SemesterController = new SemestersController();
+            
+            $TotalAvgPartA = 0;
+            $TotalAvgPartB = 0;
+            $TotalAvgPartC = 0;
+            $TotalAvgPartD = 0;
+            
+            $cCodeName = $CoursesController->getCourseCodeName($courseID);
+            $gName = $GroupController->getGroupName($grpID);
+            $semFName = $SemesterController->getFullSemName($semID);
+            
+            $otherInfo = array('cCodeName'=> $cCodeName, 'gName'=> $gName, 'semFName'=> $semFName);
+            
+            for($i = 1; $i <= 25; $i++)
+            {   
+                $totalVal1 = $this->countAns($courseID, $grpID, $semID, $i, 1);
+                $totalVal2 = $this->countAns($courseID, $grpID, $semID, $i, 2);
+                $totalVal3 = $this->countAns($courseID, $grpID, $semID, $i, 3);
+                $totalVal4 = $this->countAns($courseID, $grpID, $semID, $i, 4);
+                
+                $avg = $this->averageCounter($totalVal1, $totalVal2, $totalVal3, $totalVal4);
+                $qDesc = $QuestionController->getQuestionDesc($i);
+                //echo $qDesc;
+                $score = array('qNum' => $i, 'qDesc' => $qDesc, 'totalVal1' => $totalVal1, 'totalVal2' => $totalVal2, 'totalVal3' => $totalVal3, 'totalVal4' => $totalVal4, 'average' => $avg);
+                //$scoresArray = array('score', $score);
+                array_push($scoresArray, $score);
+                
+                if($i <= 3)
+                {
+                    $TotalAvgPartA = $TotalAvgPartA + $avg;
+                }
+                else if($i <= 12)
+                {
+                    $TotalAvgPartB = $TotalAvgPartB + $avg;
+                }
+                else if($i <= 23)
+                {
+                    $TotalAvgPartC = $TotalAvgPartC + $avg;
+                }
+                else if($i <= 25)
+                {
+                    $TotalAvgPartD = $TotalAvgPartD + $avg;
+                }
+            }
+            
+            $avgPartA = $TotalAvgPartA / 3;
+            $avgPartB = $TotalAvgPartB / 9;
+            $avgPartC = $TotalAvgPartC / 11;
+            $avgPartD = $TotalAvgPartD / 2;
+            
+            $avgPartA = CakeNumber::precision($avgPartA, 2);
+            $avgPartB = CakeNumber::precision($avgPartB, 2);
+            $avgPartC = CakeNumber::precision($avgPartC, 2);
+            $avgPartD = CakeNumber::precision($avgPartD, 2);
+            
+            $averagePart = array('avgPartA'=>$avgPartA, 'avgPartB'=>$avgPartB, 'avgPartC'=>$avgPartC, 'avgPartD'=>$avgPartD);
+            
+            $this->set(array('otherInfo'=> $otherInfo, 'scoresArray'=> $scoresArray, 'averagePart'=> $averagePart));
         }
                 
 }

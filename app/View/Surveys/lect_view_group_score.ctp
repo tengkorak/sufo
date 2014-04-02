@@ -4,28 +4,28 @@
     <?php echo "Group: ".$otherInfo['gName'];?> <br/>
     <?php echo "Semesters: ".$otherInfo['semFName'];?> <br/><br/>
     
-    <table>
+<!--    <table>
         <tr>
             <th>Part</th>
             <th>Average</th>
         </tr>
         <tr>
             <td>A</td>
-            <td><?php echo $averagePart['avgPartA']; ?></td>
+            <td><?php //echo $averagePart['avgPartA']; ?></td>
         </tr>
         <tr>
             <td>B</td>
-            <td><?php echo $averagePart['avgPartB']; ?></td>
+            <td><?php //echo $averagePart['avgPartB']; ?></td>
         </tr>
         <tr>
             <td>C</td>
-            <td><?php echo $averagePart['avgPartC']; ?></td>
+            <td><?php //echo $averagePart['avgPartC']; ?></td>
         </tr>
         <tr>
             <td>D</td>
-            <td><?php echo $averagePart['avgPartD']; ?></td>
+            <td><?php //echo $averagePart['avgPartD']; ?></td>
         </tr>
-    </table>
+    </table>-->
     
     <table>
 	<tr>

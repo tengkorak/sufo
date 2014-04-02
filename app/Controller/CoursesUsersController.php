@@ -114,6 +114,7 @@ class CoursesUsersController extends AppController {
             $query = "SELECT DISTINCT c.code, c.name
                         FROM users usr, courses_users cusr, courses c
                         WHERE usr.id = cusr.user_id
+                        AND c.id = cusr.course_id
                         AND usr.uid = '".$uid."'";
             
             $datas = $this->CoursesUser->query($query);
