@@ -138,6 +138,11 @@ class SurveysController extends AppController {
             
             for($i = 0; $i < count($datas); $i++)
             {   
+                $TotalAvgPartA = 0.0;
+                $TotalAvgPartB = 0.0;
+                $TotalAvgPartC = 0.0;
+                $TotalAvgPartD = 0.0;
+                
                 for($j = 1; $j <= 25; $j++)
                 {
                     $totalVal1 = $this->countAns($datas[$i]['c']['id'], $datas[$i]['grp']['id'], $datas[$i]['sem']['id'], $j, 1);
@@ -147,19 +152,19 @@ class SurveysController extends AppController {
 
                     $avg = $this->averageCounter($totalVal1, $totalVal2, $totalVal3, $totalVal4);
 
-                    if($i <= 3)
+                    if($j <= 3)
                     {
                         $TotalAvgPartA = $TotalAvgPartA + $avg;
                     }
-                    else if($i <= 12)
+                    else if($j <= 12)
                     {
                         $TotalAvgPartB = $TotalAvgPartB + $avg;
                     }
-                    else if($i <= 23)
+                    else if($j <= 23)
                     {
                         $TotalAvgPartC = $TotalAvgPartC + $avg;
                     }
-                    else if($i <= 25)
+                    else if($j <= 25)
                     {
                         $TotalAvgPartD = $TotalAvgPartD + $avg;
                     }

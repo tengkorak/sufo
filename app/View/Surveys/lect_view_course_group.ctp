@@ -13,22 +13,22 @@
     ?>
     <table cellpadding="0" cellspacing="0">
 	<tr>
-            <th>Course Group</th>
-            <th>Semesters</th>
-            <th>A</th>
-            <th>B</th>
-            <th>C</th>
-            <th>D</th>
+            <th> Course Group </th>
+            <th> Semesters </th>
+            <th><center> A </center></th>
+            <th><center> B </center></th>
+            <th><center> C </center></th>
+            <th><center> D </center></th>
 	</tr>
 	<?php foreach ($uiData as $data): ?>
 	<tr>
             
             <td><?php echo $this->HTML->link($data['grpName'], array('controller'=> 'Surveys', 'action'=> 'lectViewGroupScore', $data['cID'], $data['grpID'], $data['semID'])) ;?></td>
             <td><?php echo $data['semStartMon']." ".$data['semStartYear']." - ".$data['semEndMon']." ".$data['semEndYear']; ?></td>
-            <td><?php echo $data['avgPartA']; ?></td>
-            <td><?php echo $data['avgPartB']; ?></td>
-            <td><?php echo $data['avgPartC']; ?></td>
-            <td><?php echo $data['avgPartD']; ?></td>
+            <td><center> <?php echo $data['avgPartA']; ?> </center></td>
+            <td><center> <?php echo $data['avgPartB']; ?> </center></td>
+            <td><center> <?php echo $data['avgPartC']; ?> </center></td>
+            <td><center> <?php echo $data['avgPartD']; ?> </center></td>
 	</tr>
         
         <?php endforeach; ?>

@@ -171,10 +171,9 @@ class UsersController extends AppController {
     {
         $SurveysController = new SurveysController();
         
-        $query = "SELECT usr.fname, c.code, c.name, grp.name, c.id, grp.id, sem.id
+        $query = "SELECT DISTINCT usr.fname, c.code, c.name, grp.name, c.id, grp.id, sem.id
                     FROM users usr, courses c, groups grp, surveys svy, courses_users cusr, semesters sem
                     WHERE usr.id = cusr.user_id
-                    AND usr.id = svy.user_id
                     AND c.id = cusr.course_id
                     AND c.id = grp.course_id
                     AND c.id = svy.course_id
@@ -258,7 +257,7 @@ class UsersController extends AppController {
         
         $facDatas = $this->User->query($facQuery);
         //$facDatas = $facDatas[0];
-        print_r($facDatas);
+        //print_r($facDatas);
         
         //$this->set('datas', $uiData);
         $this->set(array('datas'=> $uiData, 'facDatas'=> $facDatas));
