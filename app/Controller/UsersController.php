@@ -163,7 +163,7 @@ class UsersController extends AppController {
         $this->Session->destroy();
         //$this->Session->setFlash('You have been logged out!');
         // Go home!
-        $this->Redirect('/');
+        $this->redirect(array('controller' => 'Users', 'action' => 'login_form'));
         exit();
     } 
         
