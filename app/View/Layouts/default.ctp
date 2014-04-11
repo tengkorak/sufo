@@ -16,7 +16,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'SuFO');
+$cakeDescription = __d('cake_dev', 'SuFo: Student Feedback Online');
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,22 +30,25 @@ $cakeDescription = __d('cake_dev', 'SuFO');
 		echo $this->Html->meta('icon');
 
 		echo $this->Html->css('cake.generic');
+                echo $this->Html->css('bootstrap');
+                
+                //Bootstrap :D
+                echo $this->Html->css('bootstrap.min');
+                echo $this->Html->css('bootstrap-responsive');
+                echo $this->Html->css('bootstrap-responsive.min');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
+                
 		echo $this->fetch('script');
+                echo $this->Html->script('bootstrap');
+                echo $this->Html->script('bootstrap.min');
 	?>
 </head>
-<body>
+<body style ="background-color: #eee;">
 	<div id="container">
 		<div id="header">
-                    <?php
-                        if($this->Session->check('user') == TRUE)
-                        {
-                             echo $this->Html->link('Logout', array('controller'=> 'Users', 'action'=> 'logout'));
-                        }
-                  ?>
-			<h1><?php echo $cakeDescription; ?></h1>
+			<h3><?php echo $cakeDescription; ?></h3>
 		</div>
 		<div id="content">
 
@@ -54,12 +57,7 @@ $cakeDescription = __d('cake_dev', 'SuFO');
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false)
-				);
-			?>
+			footer
 		</div>
 	</div>
 	<?php echo $this->element('sql_dump'); ?>

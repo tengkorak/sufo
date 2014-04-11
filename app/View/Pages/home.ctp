@@ -13,8 +13,6 @@ endif;
 
 App::uses('Debugger', 'Utility');
 ?>
-
-<?php echo $this->Html->link('Login', array('controller' => 'Users', 'action' => 'login_form')); ?> <br/>
-<?php echo $this->Html->link('AddNewSem', array('controller' => 'Semesters', 'action' => 'addNewSem')); ?> <br/>
-<?php echo $this->Html->link('stdViewQues', array('controller' => 'Questions', 'action' => 'stdViewQuestions')); ?> <br/>
-<?php echo $this->Html->link('Test_Lecturer', array('controller' => 'enrolls', 'action' => 'viewLectCourse', 99901)); ?>
+<?php 
+    include '/navbar/indexNavBar.php';
+?>

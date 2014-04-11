@@ -136,7 +136,7 @@ class UsersController extends AppController {
                 //$this->Redirect(array('controller' => 'Enrolls', 'action' => 'viewLectCourse', 99901));
                 if($user['role'] == '1')
                 {
-                    $this->redirect(array('controller'=> 'Users', 'action'=> 'adminViewAllLect'));
+                    $this->redirect(array('controller'=> 'surveys', 'action'=> 'adminIndex'));
                 }
                 else if($user['role'] == '2')
                 {
@@ -375,4 +375,5 @@ class UsersController extends AppController {
         
         $this->set('datas', $uiData);
     }
+    
 }

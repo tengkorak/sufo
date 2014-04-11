@@ -9,53 +9,161 @@
 /*!40101 SET NAMES utf8 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
--- Dumping data for table prac1.answers1s: ~4 rows (approximately)
+-- Dumping data for table prac1.answers1s: ~75 rows (approximately)
 /*!40000 ALTER TABLE `answers1s` DISABLE KEYS */;
 INSERT INTO `answers1s` (`id`, `survey_id`, `question_id`, `ans`) VALUES
-	(1, 1, 1, 3),
-	(2, 2, 1, 3),
-	(3, 1, 2, 2),
-	(4, 2, 2, 4);
+	(1, 1, 1, 1),
+	(2, 1, 2, 2),
+	(3, 1, 3, 1),
+	(4, 1, 4, 3),
+	(5, 1, 5, 1),
+	(6, 1, 6, 4),
+	(7, 1, 7, 1),
+	(8, 1, 8, 2),
+	(9, 1, 9, 3),
+	(10, 1, 10, 4),
+	(11, 1, 11, 1),
+	(12, 1, 12, 2),
+	(13, 1, 13, 3),
+	(14, 1, 14, 4),
+	(15, 1, 15, 1),
+	(16, 1, 16, 3),
+	(17, 1, 17, 2),
+	(18, 1, 18, 1),
+	(19, 1, 19, 2),
+	(20, 1, 20, 3),
+	(21, 1, 21, 4),
+	(22, 1, 22, 3),
+	(23, 1, 23, 1),
+	(24, 1, 24, 2),
+	(25, 1, 25, 4),
+	(26, 3, 1, 1),
+	(27, 3, 2, 3),
+	(28, 3, 3, 2),
+	(29, 3, 4, 3),
+	(30, 3, 5, 1),
+	(31, 3, 6, 4),
+	(32, 3, 7, 1),
+	(33, 3, 8, 1),
+	(34, 3, 9, 3),
+	(35, 3, 10, 2),
+	(36, 3, 11, 4),
+	(37, 3, 12, 4),
+	(38, 3, 13, 3),
+	(39, 3, 14, 1),
+	(40, 3, 15, 2),
+	(41, 3, 16, 2),
+	(42, 3, 17, 3),
+	(43, 3, 18, 3),
+	(44, 3, 19, 1),
+	(45, 3, 20, 4),
+	(46, 3, 21, 2),
+	(47, 3, 22, 2),
+	(48, 3, 23, 1),
+	(49, 3, 24, 3),
+	(50, 3, 25, 4),
+	(51, 4, 1, 1),
+	(52, 4, 2, 2),
+	(53, 4, 3, 1),
+	(54, 4, 4, 3),
+	(55, 4, 5, 1),
+	(56, 4, 6, 4),
+	(57, 4, 7, 1),
+	(58, 4, 8, 3),
+	(59, 4, 9, 2),
+	(60, 4, 10, 1),
+	(61, 4, 11, 2),
+	(62, 4, 12, 3),
+	(63, 4, 13, 2),
+	(64, 4, 14, 4),
+	(65, 4, 15, 3),
+	(66, 4, 16, 2),
+	(67, 4, 17, 3),
+	(68, 4, 18, 1),
+	(69, 4, 19, 3),
+	(70, 4, 20, 1),
+	(71, 4, 21, 2),
+	(72, 4, 22, 4),
+	(73, 4, 23, 1),
+	(74, 4, 24, 3),
+	(75, 4, 25, 2);
 /*!40000 ALTER TABLE `answers1s` ENABLE KEYS */;
 
--- Dumping data for table prac1.answers2s: ~0 rows (approximately)
+-- Dumping data for table prac1.answers2s: ~6 rows (approximately)
 /*!40000 ALTER TABLE `answers2s` DISABLE KEYS */;
+INSERT INTO `answers2s` (`id`, `survey_id`, `question_id`, `ans`) VALUES
+	(1, 1, 26, '1'),
+	(2, 1, 27, '2'),
+	(3, 3, 26, '1'),
+	(4, 3, 27, '2'),
+	(5, 4, 26, '2'),
+	(6, 4, 27, '1');
 /*!40000 ALTER TABLE `answers2s` ENABLE KEYS */;
 
--- Dumping data for table prac1.courses: ~3 rows (approximately)
+-- Dumping data for table prac1.courses: ~4 rows (approximately)
 /*!40000 ALTER TABLE `courses` DISABLE KEYS */;
 INSERT INTO `courses` (`id`, `program_id`, `code`, `name`) VALUES
-	(555231, 231, 'ITT555', 'Web Project Management'),
+	(550225, 225, 'ITT550', 'Network Design'),
+	(550231, 231, 'ITT550', 'Network Design'),
 	(650225, 225, 'CSP650', 'Project'),
 	(650231, 231, 'CSP650', 'Project');
 /*!40000 ALTER TABLE `courses` ENABLE KEYS */;
 
--- Dumping data for table prac1.courses_users: ~1 rows (approximately)
+-- Dumping data for table prac1.courses_users: ~3 rows (approximately)
 /*!40000 ALTER TABLE `courses_users` DISABLE KEYS */;
 INSERT INTO `courses_users` (`id`, `user_id`, `course_id`) VALUES
-	(1, 3, 650231),
-	(5, 3, 555231);
+	(3, 3, 650231),
+	(4, 3, 550225),
+	(5, 5, 550231);
 /*!40000 ALTER TABLE `courses_users` ENABLE KEYS */;
 
--- Dumping data for table prac1.faculties: ~2 rows (approximately)
+-- Dumping data for table prac1.faculties: ~27 rows (approximately)
 /*!40000 ALTER TABLE `faculties` DISABLE KEYS */;
 INSERT INTO `faculties` (`id`, `name`) VALUES
-	(1, 'FSKM'),
-	(2, 'Dentistry');
+	(1, 'Fakulti Undang-Undang'),
+	(2, 'Fakulti Perakaunan'),
+	(3, 'Fakulti Pentadbiran & Pengajian Polisi'),
+	(4, 'Fakulti Pengurusan Perniagaan'),
+	(5, 'Fakulti Kejuruteraan Awam'),
+	(6, 'Fakulti Kejuruteraan Elektrik'),
+	(7, 'Fakulti Kejuruteraan Mekanikal'),
+	(8, 'Fakulti Kejuruteraan Kimia'),
+	(9, 'Fakulti Seni Bina Perancangan & Ukur'),
+	(10, 'Fakulti Seni Persembahan'),
+	(11, 'Fakulti Seni Lukis & Seni Reka'),
+	(12, 'Fakulti Perubatan'),
+	(13, 'Fakulti Farmasi'),
+	(14, 'Fakulti Sains Kesihatan'),
+	(15, 'Fakulti Pergigian'),
+	(16, 'Fakulti Pengurusan Maklumat'),
+	(17, 'Fakulti Pengurusan & Teknologi Pejabat'),
+	(18, 'Fakulti Komunikasi dan Pengajian Media'),
+	(19, 'Fakulti Pengurusan Hotel & Pelancongan'),
+	(20, 'Fakulti Teknologi Kreatif Dan Artistik'),
+	(21, 'Fakulti Sains Gunaan'),
+	(22, 'Fakulti Sains Sukan Dan Rekreasi'),
+	(23, 'Fakulti Teknologi Maklumat & Sains Kuantitatif'),
+	(24, 'Fakulti Pendidikan'),
+	(25, 'Akademi Pengajian Bahasa'),
+	(26, 'Pusat Pendidikan Antarabangsa'),
+	(27, 'Pusat Pemikiran Dan Pemahaman Islam');
 /*!40000 ALTER TABLE `faculties` ENABLE KEYS */;
 
--- Dumping data for table prac1.groups: ~0 rows (approximately)
+-- Dumping data for table prac1.groups: ~4 rows (approximately)
 /*!40000 ALTER TABLE `groups` DISABLE KEYS */;
 INSERT INTO `groups` (`id`, `course_id`, `name`) VALUES
 	(1, 650231, 'CS2316A'),
-	(2, 650231, 'CS2316B');
+	(2, 550231, 'CS2316A'),
+	(3, 550225, 'CS2256A'),
+	(4, 650225, 'CS2256A');
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 
--- Dumping data for table prac1.groups_users: ~2 rows (approximately)
+-- Dumping data for table prac1.groups_users: ~3 rows (approximately)
 /*!40000 ALTER TABLE `groups_users` DISABLE KEYS */;
 INSERT INTO `groups_users` (`id`, `user_id`, `group_id`, `stats`) VALUES
-	(1, 1, 1, 0),
-	(2, 2, 1, 0);
+	(1, 1, 1, 1),
+	(2, 1, 2, 1),
+	(3, 2, 3, 1);
 /*!40000 ALTER TABLE `groups_users` ENABLE KEYS */;
 
 -- Dumping data for table prac1.programs: ~2 rows (approximately)
@@ -68,33 +176,33 @@ INSERT INTO `programs` (`id`, `faculty_id`, `code`, `name`) VALUES
 -- Dumping data for table prac1.questions: ~27 rows (approximately)
 /*!40000 ALTER TABLE `questions` DISABLE KEYS */;
 INSERT INTO `questions` (`id`, `ques`) VALUES
-	(1, 'Saya berminat dengan kursus ini.<br/> <i>\nI am interested in this course.</i>\n'),
-	(2, 'Saya sentiasa hadir ke sesi syarahan/tutorial/makmal/studio/kerja lapangan untuk kursus ini. <br/><i>\nI am always present during all lecture/tutorial/studio/fieldwork sessions for this course.</i>\n'),
-	(3, 'Saya sentiasa bersedia untuk setiap sesi syarahan/tutorial/makmal/studio/kerja lapangan untuk kursus ini.<br/><i>\nI am always prepared for every lecture/tutorial/laboratory/studio/fieldwork sessions for this course.</i>\n'),
-	(4, 'Pensyarah memaklumkan perancangan pengajaran/skema kerja kepada pelajar.<br/><i>\nThe lecturer informs the students about the teaching plan/scheme of work for this course.</i>\n'),
-	(5, 'Pensyarah menerangkan dengan jelas tentang hasil kursus dan pembelajaran kepada pelajar.<br/><i>\nThe lecturer provides a clear explanation about the course outcomes and the learning outcomes to the students.</i>\n'),
-	(6, 'Pensyarah menerangkan cara penilaian kursus dengan jelas kepada pelajar.<br/><i>\nThe lecturer clearly explains to the students the assessment procedure for this course.</i>\n'),
-	(7, 'Pensyarah mengendalikan sesi syarahan/tutorial/makmal/studio/klinikal/kerja lapangan yang ditangguhkan.<br/><i>\nThe lecturer conducts lecture/tutorial/laboratory/studio/clinical/fieldwork sessions based on the teaching plan for this course.</i>'),
-	(8, 'Pensyarah memenuhi waktu pengajaran yang dijadualkan.<br/><i>\nThe lecturer observes the scheduled training hours for this course.</i>'),
-	(9, 'Pensyarah menggantikan setiap sesi syarahan/tutorial/makmal/studio/klinikal/kerja lapangan yang ditangguhkan.<br/>\n(Sekiranya pensyarah tidak pernah menangguhkan kelas, sila abaikan soalan ini.)<br/><i>\nThe lecturer replaces every lecture/tutorial/laboratory/studio/clinical/field work sessions which has been postponed.<br/>\n(If lecturer never postpones lecture, do not answer this question.)</i>\n'),
-	(10, 'Pensyarah mengambil berat tentang kehadiran pelajar. <br/><i>\nThe lecturer is concerned about the studentsâ€™ attendance.</i>'),
-	(11, 'Pensyarah menggunakan Bahasa Inggeris sebagai bahasa pengantar semasa kuliah (jika berkaitan). <br/><i>\nThe lecturer uses English language during lectures (where applicable).</i>\n'),
-	(12, 'Pensyarah sentiasa bersedia untuk setiap sesi pertemuan/pengajaran.<br/><i>\nThe lecturer is always prepared for every meeting/lecture.</i>'),
-	(13, 'Pensyarah berusaha untuk membantu pelajar untuk memahami pelajaran.<br/><i>\nThe lecturer makes effort to help students understand the lessons.</i>'),
-	(14, 'Pensyarah menggunakan/mencadangkan bahan pengajaran/pembelajaran/rujukan yang sesuai.<br/><i>\nThe lecturer uses/suggests suitable teaching aids/references.</i>'),
-	(15, 'Pensyarah menggunakan kaedah penyampaian yang sesuai dan berkesan.<br/><i>\nThe lecturer uses effective and appropriate teaching techniques.</i>'),
-	(16, 'Pensyarah menggalakkan pelajar bertanya soalan dan mengemukakan pendapat.<br/><i>\nThe lecturer encourages the students to ask questions and give opinions.</i>'),
-	(17, 'Pensyarah bersedia memberi bimbingan akademik kepada pelajar.<br/><i>\nThe lecturer is prepared to provide academic guidance to students.</i>'),
+	(1, 'Saya berminat dengan kursus ini.<br/>\nI am interested in this course.\n'),
+	(2, 'Saya sentiasa hadir ke sesi syarahan/tutorial/makmal/studio/kerja lapangan untuk kursus ini. <br/>\nI am always present during all lecture/tutorial/studio/fieldwork sessions for this course.\n'),
+	(3, 'Saya sentiasa bersedia untuk setiap sesi syarahan/tutorial/makmal/studio/kerja lapangan untuk kursus ini.<br/>\nI am always prepared for every lecture/tutorial/laboratory/studio/fieldwork sessions for this course.\n'),
+	(4, 'Pensyarah memaklumkan perancangan pengajaran/skema kerja kepada pelajar.<br/>\nThe lecturer informs the students about the teaching plan/scheme of work for this course.\n'),
+	(5, 'Pensyarah menerangkan dengan jelas tentang hasil kursus dan pembelajaran kepada pelajar.<br/>\nThe lecturer provides a clear explanation about the course outcomes and the learning outcomes to the students.\n'),
+	(6, 'Pensyarah menerangkan cara penilaian kursus dengan jelas kepada pelajar.<br/>\nThe lecturer clearly explains to the students the assessment procedure for this course.\n'),
+	(7, 'Pensyarah mengendalikan sesi syarahan/tutorial/makmal/studio/klinikal/kerja lapangan yang ditangguhkan.<br/>\nThe lecturer conducts lecture/tutorial/laboratory/studio/clinical/fieldwork sessions based on the teaching plan for this course.'),
+	(8, 'Pensyarah memenuhi waktu pengajaran yang dijadualkan.<br/>\nThe lecturer observes the scheduled training hours for this course.'),
+	(9, 'Pensyarah menggantikan setiap sesi syarahan/tutorial/makmal/studio/klinikal/kerja lapangan yang ditangguhkan.\n(Sekiranya pensyarah tidak pernah menangguhkan kelas, sila abaikan soalan ini.)<br/>\nThe lecturer replaces every lecture/tutorial/laboratory/studio/clinical/field work sessions which has been postponed.\n(If lecturer never postpones lecture, do not answer this question.)\n'),
+	(10, 'Pensyarah mengambil berat tentang kehadiran pelajar.<br/>\nThe lecturer is concerned about the studentsâ€™ attendance.'),
+	(11, 'Pensyarah menggunakan Bahasa Inggeris sebagai bahasa pengantar semasa kuliah (jika berkaitan).<br/>\nThe lecturer uses English language during lectures (where applicable).\n'),
+	(12, 'Pensyarah sentiasa bersedia untuk setiap sesi pertemuan/pengajaran.<br/>\nThe lecturer is always prepared for every meeting/lecture.'),
+	(13, 'Pensyarah berusaha untuk membantu pelajar untuk memahami pelajaran.<br/>\nThe lecturer makes effort to help students understand the lessons.'),
+	(14, 'Pensyarah menggunakan/mencadangkan bahan pengajaran/pembelajaran/rujukan yang sesuai.<br/>\nThe lecturer uses/suggests suitable teaching aids/references.'),
+	(15, 'Pensyarah menggunakan kaedah penyampaian yang sesuai dan berkesan.<br/>\nThe lecturer uses effective and appropriate teaching techniques.'),
+	(16, 'Pensyarah menggalakkan pelajar bertanya soalan dan mengemukakan pendapat.<br/>\nThe lecturer encourages the students to ask questions and give opinions.'),
+	(17, 'Pensyarah bersedia memberi bimbingan akademik kepada pelajar.<br/>\nThe lecturer is prepared to provide academic guidance to students.'),
 	(18, 'Pensyarah memberi ujian/penilaian/tugasan yang sesuai dengan hasil pembelajaran dan hasil kusus.<br/>\nThe lecturer gives tests/evaluation/assignments in line with the learning and course outcomes.'),
-	(19, 'Pensyarah memaklumkan setiap hasil penilaian kepada pelajar. <br/><i>\nThe lecturer informs every assessment results to the students.</i>\n'),
-	(20, 'Pensyarah berpakaian kemas dan sopan.<br/><i>\nThe lecturer is appropriately attired.</i>\n'),
-	(21, 'Pensyarah membincangkan isu-isu yang relevan dengan bidang semasa sesi pertemuan rasmi.<br/><i>\nThe lecturer discusses relevant issues pertaining to the course during lectures.</i>\n'),
-	(22, 'Pensyarah mudah dihubungi untuk perbincangan.<br/><i>\nThe lecturer is easily contactable for discussions. </i>\n'),
-	(23, 'Secara keseluruhannya, saya berpuas hati dengan pengajaran pensyarah ini.<br/><i>\nIn general, I am satisfied with the lecturerâ€™s teaching.</i>'),
-	(24, 'Kelengkapan ruang kondusif untuk pembelajaran dan pengajaran.<br/><i>\nThe space is conducive for teaching and learning.</i>\n'),
-	(25, 'Kelengkapan dan peralatan pengajaran bagi kursus ini mencukupi dan berfungsi.<br/><i>\nThe teaching and learning equipments are adequate and functioning.</i>\n'),
-	(26, 'Nyatakan apa yang anda suka tentang kursus ini.<br/><i>\nState what you like about this course.</i>\n'),
-	(27, 'Cadangkan aspek penambahbaikan untuk kursus ini.<br/><i>\nSuggest improvements to aspects of the course.</i>');
+	(19, 'Pensyarah memaklumkan setiap hasil penilaian kepada pelajar.<br/>\nThe lecturer informs every assessment results to the students.\n'),
+	(20, 'Pensyarah berpakaian kemas dan sopan.<br/>\nThe lecturer is appropriately attired.\n'),
+	(21, 'Pensyarah membincangkan isu-isu yang relevan dengan bidang semasa sesi pertemuan rasmi.<br/>\nThe lecturer discusses relevant issues pertaining to the course during lectures.\n'),
+	(22, 'Pensyarah mudah dihubungi untuk perbincangan.<br/>\nThe lecturer is easily contactable for discussions. \n'),
+	(23, 'Secara keseluruhannya, saya berpuas hati dengan pengajaran pensyarah ini.<br/>\nIn general, I am satisfied with the lecturerâ€™s teaching.'),
+	(24, 'Kelengkapan ruang kondusif untuk pembelajaran dan pengajaran.<br/>\nThe space is conducive for teaching and learning.\n'),
+	(25, 'Kelengkapan dan peralatan pengajaran bagi kursus ini mencukupi dan berfungsi.<br/>\nThe teaching and learning equipments are adequate and functioning.\n'),
+	(26, 'Nyatakan apa yang anda suka tentang kursus ini.<br/>\nState what you like about this course.\n'),
+	(27, 'Cadangkan aspek penambahbaikan untuk kursus ini.<br/>\nSuggest improvements to aspects of the course.');
 /*!40000 ALTER TABLE `questions` ENABLE KEYS */;
 
 -- Dumping data for table prac1.scores: ~0 rows (approximately)
@@ -108,20 +216,25 @@ INSERT INTO `semesters` (`id`, `startmonth`, `startyear`, `endmonth`, `endyear`)
 	(20141, 'Mac', '2014', 'Jun', '2014');
 /*!40000 ALTER TABLE `semesters` ENABLE KEYS */;
 
--- Dumping data for table prac1.surveys: ~2 rows (approximately)
+-- Dumping data for table prac1.surveys: ~6 rows (approximately)
 /*!40000 ALTER TABLE `surveys` DISABLE KEYS */;
 INSERT INTO `surveys` (`id`, `user_id`, `course_id`, `semester_id`, `group_id`) VALUES
 	(1, 1, 650231, 20131, 1),
-	(2, 2, 650231, 20131, 1);
+	(3, 1, 550231, 20131, 2),
+	(4, 2, 550225, 20131, 3),
+	(5, 3, 550225, 20131, 3),
+	(6, 3, 650231, 20131, 1),
+	(7, 5, 550231, 20131, 2);
 /*!40000 ALTER TABLE `surveys` ENABLE KEYS */;
 
--- Dumping data for table prac1.users: ~4 rows (approximately)
+-- Dumping data for table prac1.users: ~5 rows (approximately)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `faculty_id`, `uid`, `pswd`, `fname`, `role`, `addrs`, `nric`, `email`, `gender`) VALUES
-	(1, 1, 111111, '123456', 'Student 1', 3, NULL, NULL, NULL, NULL),
-	(2, 1, 222222, '123456', 'Student 2', 3, NULL, NULL, NULL, NULL),
-	(3, 1, 99901, '123456', 'Lecturer 1', 2, NULL, NULL, NULL, NULL),
-	(999999, 1, 999999, 'admin', 'Administrator', 1, NULL, NULL, NULL, NULL);
+	(1, 23, 111111, '123456', 'Sayyid Haziq Bin Rosfan', 3, NULL, NULL, NULL, NULL),
+	(2, 23, 222222, '123456', 'Zerajmahal Binti Biansing', 3, NULL, NULL, NULL, NULL),
+	(3, 23, 99901, '123456', 'Jamaliah Binti Taslim', 2, NULL, NULL, NULL, NULL),
+	(5, 23, 99902, '123456', 'Shapina Binti Abdullah', 2, NULL, NULL, NULL, NULL),
+	(6, 23, 999999, 'admin', 'Administrator 001', 1, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
