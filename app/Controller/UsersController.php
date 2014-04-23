@@ -1,3 +1,4 @@
+
 <?php
 App::uses('AppController', 'Controller');
 App::import('Controller', 'Surveys');
@@ -163,7 +164,7 @@ class UsersController extends AppController {
         $this->Session->destroy();
         //$this->Session->setFlash('You have been logged out!');
         // Go home!
-        $this->redirect(array('controller' => 'Users', 'action' => 'login_form'));
+        $this->Redirect('/');
         exit();
     } 
         
