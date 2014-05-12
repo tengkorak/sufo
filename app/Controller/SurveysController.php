@@ -5,6 +5,8 @@ App::import('Controller', 'Courses');
 App::import('Controller', 'Semesters');
 App::import('Controller', 'Groups');
 App::import('Controller', 'Users');
+App::import('Controller', 'Campuses');
+App::import('Controller', 'Faculties');
 
 /**
  * Surveys Controller
@@ -181,7 +183,6 @@ class SurveysController extends AppController {
                     $avgPartD = CakeNumber::precision($avgPartD, 2);
                 }
                 
-                
                 $viewData = array('grpName'=>$datas[$i]['grp']['name'],
                                     'semStartMon'=> $datas[$i]['sem']['startmonth'],
                                     'semStartYear'=> $datas[$i]['sem']['startyear'],
@@ -199,7 +200,7 @@ class SurveysController extends AppController {
                 array_push($uiData, $viewData);
             }
             
-            $this->set('uiData', $uiData);
+            $this->set(array('uiData'=> $uiData, 'datas'=> $datas));
         }
         
         public function countAns($courseID = NULL, $grpID = NULL, $semID = NULL, $qNum = NULL, $ansVal = NULL)
@@ -221,7 +222,40 @@ class SurveysController extends AppController {
             $datas = $this->Survey->query($query);
             return $datas[0][0]['ansCount'];
         }
-
+        
+        public function countAnsv2($cat, $camFacID, $semID, $qNum, $ansVal)
+        {
+            if($cat == "campus")
+            {
+                $query = "SELECT COUNT(a1.id) as ansCount
+                        FROM users usr, campuses camp, surveys svy, answers1s a1, semesters sem
+                        WHERE usr.id = svy.user_id
+                        AND camp.id = usr.campus_id
+                        AND svy.id = a1.survey_id
+                        AND sem.id = svy.semester_id
+                        AND usr.campus_id = $camFacID
+                        AND sem.id = $semID
+                        AND a1.question_id = $qNum
+                        AND a1.ans = $ansVal";
+            }
+            
+            if($cat == "faculty")
+            {
+                $query = "SELECT COUNT(a1.id) as ansCount
+                        FROM users usr, faculties fac, surveys svy, answers1s a1, semesters sem
+                        WHERE usr.id = svy.user_id
+                        AND fac.id = usr.faculty_id
+                        AND svy.id = a1.survey_id
+                        AND sem.id = svy.semester_id
+                        AND usr.faculty_id = $camFacID
+                        AND sem.id = $semID
+                        AND a1.question_id = $qNum
+                        AND a1.ans = $ansVal";
+            }
+            
+            $result = $this->Survey->query($query);
+            return $result[0][0]['ansCount'];
+        }
 
         public function lectViewGroupScore($courseID = NULL, $grpID = NULL, $semID = NULL)
         {
@@ -252,8 +286,10 @@ class SurveysController extends AppController {
                 
                 $avg = $this->averageCounter($totalVal1, $totalVal2, $totalVal3, $totalVal4);
                 $qDesc = $QuestionController->getQuestionDesc($i);
+                $qDescBI = $QuestionController->getQuestionDescBI($i);
                 //echo $qDesc;
-                $score = array('qNum' => $i, 'qDesc' => $qDesc, 'totalVal1' => $totalVal1, 'totalVal2' => $totalVal2, 'totalVal3' => $totalVal3, 'totalVal4' => $totalVal4, 'average' => $avg);
+                
+                $score = array('qNum' => $i, 'qDesc' => $qDesc, 'qDescBI'=> $qDescBI, 'totalVal1' => $totalVal1, 'totalVal2' => $totalVal2, 'totalVal3' => $totalVal3, 'totalVal4' => $totalVal4, 'average' => $avg);
                 //$scoresArray = array('score', $score);
                 array_push($scoresArray, $score);
                 
@@ -339,9 +375,10 @@ class SurveysController extends AppController {
                 
                 $avg = $this->averageCounter($totalVal1, $totalVal2, $totalVal3, $totalVal4);
                 $qDesc = $QuestionController->getQuestionDesc($i);
+                $qDescBI = $QuestionController->getQuestionDescBI($i);
                 //echo $qDesc;
                 
-                $score = array('qNum' => $i, 'qDesc' => $qDesc, 'totalVal1' => $totalVal1, 'totalVal2' => $totalVal2, 'totalVal3' => $totalVal3, 'totalVal4' => $totalVal4, 'average' => $avg);
+                $score = array('qNum' => $i, 'qDesc' => $qDesc, 'qDescBI'=> $qDescBI, 'totalVal1' => $totalVal1, 'totalVal2' => $totalVal2, 'totalVal3' => $totalVal3, 'totalVal4' => $totalVal4, 'average' => $avg);
                 //$scoresArray = array('score', $score);
                 array_push($scoresArray, $score);
                 
@@ -429,7 +466,12 @@ class SurveysController extends AppController {
                 }
 
                 $query.="ORDER BY usr.fname, c.code";
-
+                
+                if($keyword == NULL && $srchField == "NULL" && $faculty == "NULL")
+                {
+                    $query.=" limit 20";
+                }
+                
                 $datas = $this->Survey->query($query);
 
                 $cData =  array();
@@ -505,6 +547,207 @@ class SurveysController extends AppController {
 
             }
             $this->set(array('datas'=> $uiData, 'facDatas'=> $facDatas));
+        }
+        
+        public function adminViewStatCampFac()
+        {
+            $semQuery = "SELECT id, startmonth, startyear, endmonth, endyear FROM semesters";
+            $semDatas = $this->Survey->query($semQuery);
+            
+            if($this->request->data == NULL)
+            {
+                $uiData = NULL;
+            }
+            else if($this->request->data != NULL)
+            {
+                $uiData = NULL;
+                
+                $semID = $this->request->data['semester'];
+                //echo $semID;
+                
+            }
+            
+            $this->set(array('datas'=> $uiData, 'semDatas'=> $semDatas));
+            
+        }
+        
+        public function lectIndex()
+        {
+            
+        }
+        
+        public function adminViewStatSection()
+        {
+            $semQuery = "SELECT id, startmonth, startyear, endmonth, endyear FROM semesters";
+            $semDatas = $this->Survey->query($semQuery);
+            
+            if($this->request->data == NULL)
+            {
+                $uiData = NULL;
+            }
+            else if($this->request->data != NULL)
+            {
+                $uiData = NULL;
+                $semID = $this->request->data['semester'];
+                $ctgry = $this->request->data['category'];
+                $SurveysController = new SurveysController();
+                $CampusController = new CampusesController();
+                $FacultyController = new FacultiesController();
+                //echo $semID;
+                
+                if($ctgry == "campus")
+                {
+                    $query = "SELECT id, name, code FROM campuses";
+                    $campuses = $this->Survey->query($query);
+                    //print_r($campuses);
+                    $uiData = array();
+                    foreach($campuses as $campus):
+                        $datas = NULL;
+                        $scoreData = $SurveysController->getCamFacScoreSection($ctgry, $semID, $campus['campuses']['id']);
+                        
+                        $campusName = $CampusController->getCampusNamebyID($campus['campuses']['id']);
+                        $campusCode = $CampusController->getCampusCodebyID($campus['campuses']['id']);
+                        
+                        $datas = array('campFacName'=> $campusName, 'campFacCode'=> $campusCode, 'scoreData'=> $scoreData);
+                        array_push($uiData, $datas);
+                    endforeach;
+                }
+                
+                if($ctgry == "faculty")
+                {
+                    $query = "SELECT id, name, code FROM faculties";
+                    $faculties = $this->Survey->query($query);
+                    //print_r($campuses);
+                    $uiData = array();
+                    foreach($faculties as $faculty):
+                        $datas = NULL;
+                        $scoreData = $SurveysController->getCamFacScoreSection($ctgry, $semID, $faculty['faculties']['id']);
+                        
+                        $facName = $FacultyController->getFacNamebyID($faculty['faculties']['id']);
+                        $facCode = $FacultyController->getFacCodebyID($faculty['faculties']['id']);
+                        
+                        $datas = array('campFacName'=> $facName, 'campFacCode'=> $facCode, 'scoreData'=> $scoreData);
+                        array_push($uiData, $datas);
+                    endforeach;
+                    
+                }
+                
+                //$this->set(array('uiData'=> $uiData));
+            }
+            
+            $this->set(array('datas'=> $uiData, 'semDatas'=> $semDatas));
+        }
+        
+        public function getCamFacScoreSection($ctgry, $semID, $camFacID)
+        {
+            //lol
+            $TotalAvgPartA = 0;
+            $TotalAvgPartB = 0;
+            $TotalAvgPartC = 0;
+            $TotalAvgPartD = 0;
+            $SurveyController = new SurveysController();
+            
+            if($ctgry == "campus")
+            {
+                for($i = 1; $i <= 25; $i++)
+                {
+                    $totalVal1 = $SurveyController->countAnsv2($ctgry, $camFacID, $semID, $i, 1);
+                    $totalVal2 = $SurveyController->countAnsv2($ctgry, $camFacID, $semID, $i, 2);
+                    $totalVal3 = $SurveyController->countAnsv2($ctgry, $camFacID, $semID, $i, 3);
+                    $totalVal4 = $SurveyController->countAnsv2($ctgry, $camFacID, $semID, $i, 4);
+                    
+                    $avg = $SurveyController->averageCounter($totalVal1, $totalVal2, $totalVal3, $totalVal4);
+
+                    if($i <= 3)
+                    {
+                        $TotalAvgPartA = $TotalAvgPartA + $avg;
+                    }
+                    else if($i <= 12)
+                    {
+                        $TotalAvgPartB = $TotalAvgPartB + $avg;
+                    }
+                    else if($i <= 23)
+                    {
+                        $TotalAvgPartC = $TotalAvgPartC + $avg;
+                    }
+                    else if($i <= 25)
+                    {
+                        $TotalAvgPartD = $TotalAvgPartD + $avg;
+                    }
+                }
+
+                $avgPartA = $TotalAvgPartA / 3;
+                $avgPartB = $TotalAvgPartB / 9;
+                $avgPartC = $TotalAvgPartC / 11;
+                $avgPartD = $TotalAvgPartD / 2;
+                $overallAvg = ($avgPartA + $avgPartB + $avgPartC + $avgPartD) / 4;
+
+                $avgPartA = CakeNumber::precision($avgPartA, 2);
+                $avgPartB = CakeNumber::precision($avgPartB, 2);
+                $avgPartC = CakeNumber::precision($avgPartC, 2);
+                $avgPartD = CakeNumber::precision($avgPartD, 2);
+                $overallAvg = CakeNumber::precision($overallAvg, 2);
+                
+                $data = array('sectA'=> $avgPartA, 'sectB'=> $avgPartB, 'sectC'=> $avgPartC, 'sectD'=> $avgPartD, 'overAllAVG'=> $overallAvg);
+            }
+            
+            if($ctgry == "faculty")
+            {
+                for($i = 1; $i <= 25; $i++)
+                {
+                    $totalVal1 = $SurveyController->countAnsv2($ctgry, $camFacID, $semID, $i, 1);
+                    $totalVal2 = $SurveyController->countAnsv2($ctgry, $camFacID, $semID, $i, 2);
+                    $totalVal3 = $SurveyController->countAnsv2($ctgry, $camFacID, $semID, $i, 3);
+                    $totalVal4 = $SurveyController->countAnsv2($ctgry, $camFacID, $semID, $i, 4);
+                    
+                    $avg = $SurveyController->averageCounter($totalVal1, $totalVal2, $totalVal3, $totalVal4);
+
+                    if($i <= 3)
+                    {
+                        $TotalAvgPartA = $TotalAvgPartA + $avg;
+                    }
+                    else if($i <= 12)
+                    {
+                        $TotalAvgPartB = $TotalAvgPartB + $avg;
+                    }
+                    else if($i <= 23)
+                    {
+                        $TotalAvgPartC = $TotalAvgPartC + $avg;
+                    }
+                    else if($i <= 25)
+                    {
+                        $TotalAvgPartD = $TotalAvgPartD + $avg;
+                    }
+                }
+
+                $avgPartA = $TotalAvgPartA / 3;
+                $avgPartB = $TotalAvgPartB / 9;
+                $avgPartC = $TotalAvgPartC / 11;
+                $avgPartD = $TotalAvgPartD / 2;
+                $overallAvg = ($avgPartA + $avgPartB + $avgPartC + $avgPartD) / 4;
+
+                $avgPartA = CakeNumber::precision($avgPartA, 2);
+                $avgPartB = CakeNumber::precision($avgPartB, 2);
+                $avgPartC = CakeNumber::precision($avgPartC, 2);
+                $avgPartD = CakeNumber::precision($avgPartD, 2);
+                $overallAvg = CakeNumber::precision($overallAvg, 2);
+                
+                $data = array('sectA'=> $avgPartA, 'sectB'=> $avgPartB, 'sectC'=> $avgPartC, 'sectD'=> $avgPartD, 'overAllAVG'=> $overallAvg);
+            
+            }
+            
+            return $data;
+        }
+
+
+        public function countCamFacScoreSection($camFacID)
+        {
+            
+        }
+        
+        public function aboutSuFO()
+        {
+            
         }
                 
 }

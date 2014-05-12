@@ -27,25 +27,28 @@ $cakeDescription = __d('cake_dev', 'SuFo: Student Feedback Online');
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
-		echo $this->Html->meta('icon');
+            echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.generic');
-                echo $this->Html->css('bootstrap');
-                
-                //Bootstrap :D
-                echo $this->Html->css('bootstrap.min');
-                echo $this->Html->css('bootstrap-responsive');
-                echo $this->Html->css('bootstrap-responsive.min');
+            echo $this->Html->css('cake.generic');
+            echo $this->Html->css('bootstrap');
 
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-                
-		echo $this->fetch('script');
-                echo $this->Html->script('bootstrap');
-                echo $this->Html->script('bootstrap.min');
+            //Bootstrap :D
+            echo $this->Html->css('bootstrap.min');
+            echo $this->Html->css('bootstrap-responsive');
+            echo $this->Html->css('bootstrap-responsive.min');
+            
+            echo $this->Html->script('bootstrap');
+            echo $this->Html->script('bootstrap.min');
+            echo $this->Html->script('bootstrap-collapse');
+
+            echo $this->fetch('meta');
+            echo $this->fetch('css');
+            echo $this->fetch('script');
 	?>
 </head>
+
 <body style ="background-color: #eee;">
+
 	<div id="container">
 		<div id="header">
 			<h3><?php echo $cakeDescription; ?></h3>
@@ -60,6 +63,7 @@ $cakeDescription = __d('cake_dev', 'SuFo: Student Feedback Online');
 			footer
 		</div>
 	</div>
+	
 	<?php echo $this->element('sql_dump'); ?>
 </body>
 </html>

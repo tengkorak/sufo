@@ -1,13 +1,13 @@
-<div class="users form">
-    <?php
-        // Pass the model name into the Create function, also pass where the data will be sent
-        echo $this->Form->create('User', array( 'controller' => 'users', 'action' => 'login' ) );
+<?php
+        include '/navbar/indexNavBar.php';
+?>
 
-        // Cake automatically knows, based on the input, to create input fields for these two. Cool eh?
-        echo $this->Form->input('uid');
-        echo $this->Form->input('pswd');
+<form class="form-horizontal" action="/sufo/users/login" method="post">
 
-        // Create the submit button
-        echo $this->Form->end('Login');
-    ?>
-</div>
+      <input id="UserUid" type="text" name="data[User][uid]" placeholder="User ID">
+      <br/><br/>
+      <input id="UserPswd" type="password" name="data[User][pswd]" placeholder="Password">
+      <br/><br/>
+      <input type="submit" value="Login" class="btn btn-success"/>
+
+</form>

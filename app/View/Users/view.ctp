@@ -11,6 +11,11 @@
 			<?php echo $this->Html->link($user['Faculty']['name'], array('controller' => 'faculties', 'action' => 'view', $user['Faculty']['id'])); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Campus'); ?></dt>
+		<dd>
+			<?php echo $this->Html->link($user['Campus']['name'], array('controller' => 'campuses', 'action' => 'view', $user['Campus']['id'])); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Uid'); ?></dt>
 		<dd>
 			<?php echo h($user['User']['uid']); ?>
@@ -62,6 +67,8 @@
 		<li><?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Faculties'), array('controller' => 'faculties', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Faculty'), array('controller' => 'faculties', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Campuses'), array('controller' => 'campuses', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Campus'), array('controller' => 'campuses', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Surveys'), array('controller' => 'surveys', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Survey'), array('controller' => 'surveys', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Courses'), array('controller' => 'courses', 'action' => 'index')); ?> </li>

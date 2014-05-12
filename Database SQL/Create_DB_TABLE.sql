@@ -47,6 +47,17 @@ CREATE TABLE IF NOT EXISTS `answers2s` (
 -- Data exporting was unselected.
 
 
+-- Dumping structure for table prac1.campuses
+CREATE TABLE IF NOT EXISTS `campuses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text,
+  `code` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+
+
 -- Dumping structure for table prac1.courses
 CREATE TABLE IF NOT EXISTS `courses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -69,8 +80,8 @@ CREATE TABLE IF NOT EXISTS `courses_users` (
   PRIMARY KEY (`id`),
   KEY `fk_courses_users_users1_idx` (`user_id`),
   KEY `fk_courses_users_courses1_idx` (`course_id`),
-  CONSTRAINT `fk_courses_users_courses1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
-  CONSTRAINT `fk_courses_users_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  CONSTRAINT `fk_courses_users_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `fk_courses_users_courses1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
@@ -80,6 +91,7 @@ CREATE TABLE IF NOT EXISTS `courses_users` (
 CREATE TABLE IF NOT EXISTS `faculties` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text,
+  `code` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -88,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `faculties` (
 
 -- Dumping structure for table prac1.groups
 CREATE TABLE IF NOT EXISTS `groups` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `course_id` int(11) NOT NULL,
   `name` varchar(7) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -108,8 +120,8 @@ CREATE TABLE IF NOT EXISTS `groups_users` (
   PRIMARY KEY (`id`),
   KEY `fk_groups_users_users1_idx` (`user_id`),
   KEY `fk_groups_users_groups1_idx` (`group_id`),
-  CONSTRAINT `fk_groups_users_groups1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`),
-  CONSTRAINT `fk_groups_users_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  CONSTRAINT `fk_groups_users_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `fk_groups_users_groups1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
@@ -133,6 +145,7 @@ CREATE TABLE IF NOT EXISTS `programs` (
 CREATE TABLE IF NOT EXISTS `questions` (
   `id` int(11) NOT NULL,
   `ques` text,
+  `quesbi` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -193,6 +206,7 @@ CREATE TABLE IF NOT EXISTS `surveys` (
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `faculty_id` int(11) NOT NULL,
+  `campus_id` int(11) NOT NULL,
   `uid` int(11) DEFAULT NULL,
   `pswd` varchar(45) DEFAULT NULL,
   `fname` text,
@@ -204,7 +218,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `USR_UID_UNIQUE` (`uid`),
   KEY `fk_USERS_FACULTY1_idx` (`faculty_id`),
-  CONSTRAINT `fk_USERS_FACULTY1` FOREIGN KEY (`faculty_id`) REFERENCES `faculties` (`id`)
+  KEY `fk_users_campuses1_idx` (`campus_id`),
+  CONSTRAINT `fk_USERS_FACULTY1` FOREIGN KEY (`faculty_id`) REFERENCES `faculties` (`id`),
+  CONSTRAINT `fk_users_campuses1` FOREIGN KEY (`campus_id`) REFERENCES `campuses` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.

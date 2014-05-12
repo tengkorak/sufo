@@ -13,6 +13,26 @@ endif;
 
 App::uses('Debugger', 'Utility');
 ?>
-<?php 
-    include '/navbar/indexNavBar.php';
+<?php
+
+    if($this->Session->check('User') == TRUE)
+    {
+        if($this->Session->read('User.role') == "1")
+        {
+            include '/navbar/adminNavBar.php';
+        }
+        else if($this->Session->read('User.role') == "2")
+        {
+            include '/navbar/lectNavBar.php';
+        }
+        else if($this->Session->read('User.role') == "3")
+        {
+            echo 'navbar role 3';
+        }
+    }
+    else
+    {
+        include '/navbar/indexNavBar.php';
+    }
+    
 ?>

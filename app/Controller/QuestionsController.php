@@ -122,6 +122,26 @@ class QuestionsController extends AppController {
             return $qDesc;
         }
         
+        public function getQuestionDescBI($id = NULL)
+        {
+            $qDesc = $this->Question->read(NULL, $id);
+            //echo "Belom spec";
+            //print_r($qDesc);
+            
+            if(!empty($qDesc))
+            {
+                $qDesc = $qDesc['Question']['quesbi'];
+                //echo 'lol';
+            }
+            else
+            {
+                $qDesc = '';
+            }
+            //debug($qDesc);
+            //print_r($qDesc);
+            return $qDesc;
+        }
+        
         public function stdViewQuestions()
         {
             $query = "SELECT id, ques

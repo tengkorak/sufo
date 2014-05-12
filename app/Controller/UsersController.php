@@ -1,6 +1,5 @@
 <?php
 App::uses('AppController', 'Controller');
-App::import('Controller', 'Surveys');
 /**
  * Users Controller
  *
@@ -57,9 +56,10 @@ class UsersController extends AppController {
 			}
 		}
 		$faculties = $this->User->Faculty->find('list');
+		$campuses = $this->User->Campus->find('list');
 		$courses = $this->User->Course->find('list');
 		$groups = $this->User->Group->find('list');
-		$this->set(compact('faculties', 'courses', 'groups'));
+		$this->set(compact('faculties', 'campuses', 'courses', 'groups'));
 	}
 
 /**
@@ -85,9 +85,10 @@ class UsersController extends AppController {
 			$this->request->data = $this->User->find('first', $options);
 		}
 		$faculties = $this->User->Faculty->find('list');
+		$campuses = $this->User->Campus->find('list');
 		$courses = $this->User->Course->find('list');
 		$groups = $this->User->Group->find('list');
-		$this->set(compact('faculties', 'courses', 'groups'));
+		$this->set(compact('faculties', 'campuses', 'courses', 'groups'));
 	}
 
 /**
@@ -111,7 +112,6 @@ class UsersController extends AppController {
 		return $this->redirect(array('action' => 'index'));
 	}
         
-        // Placeholder for login_form, required by CakePHP to see the login_form view
     function login_form() { }
  
     function login()
@@ -122,17 +122,14 @@ class UsersController extends AppController {
         if(empty($this->data['User']['uid']) == false && empty($this->data['User']['pswd']) == FALSE)
         {
             //echo 'lol2';
-            // Here we validate the user by calling that method from the User model
             if(($user = $this->User->validateLogin($this->data['User'])) != false)
             {
-                // Write some Session variables and redirect to our next page!
                 //$this->Session->setFlash('Logged IN');
                 $this->Session->write('User', $user);
                 
                 //echo 'lol3';
                 //print_r($user);
- 
-                // Go to our first destination!
+                //
                 //$this->Redirect(array('controller' => 'Enrolls', 'action' => 'viewLectCourse', 99901));
                 if($user['role'] == '1')
                 {
@@ -140,7 +137,7 @@ class UsersController extends AppController {
                 }
                 else if($user['role'] == '2')
                 {
-                    $this->Redirect(array('controller' => 'CoursesUsers', 'action' => 'lectViewCourse', $user['uid']));
+                    $this->Redirect(array('controller' => 'surveys', 'action' => 'lectIndex'));
                 }
                 else if($user['role'] == '3')
                 {
@@ -162,7 +159,6 @@ class UsersController extends AppController {
     {
         $this->Session->destroy();
         //$this->Session->setFlash('You have been logged out!');
-        // Go home!
         $this->Redirect('/');
         exit();
     }
@@ -376,4 +372,15 @@ class UsersController extends AppController {
         $this->set('datas', $uiData);
     }
     
+    public function adminListLecturer()
+    {
+        $lectQuery = "SELECT id, faculty_id, campus_id, uid, pswd, fname, role, addrs, nric, email, gender
+                        FROM users
+                        WHERE role = 2";
+
+        $lecturers = $this->User->query($lectQuery);
+
+        $this->set(array('lecturers'=> $lecturers));
+    }
+        
 }

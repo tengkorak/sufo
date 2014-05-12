@@ -100,4 +100,31 @@ class FacultiesController extends AppController {
 			$this->Session->setFlash(__('The faculty could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
-	}}
+	}
+        
+        public function adminListFaculty()
+        {
+            $facQuery = "SELECT id, name FROM faculties";
+            
+            $faculties = $this->Faculty->query($facQuery);
+            
+            $this->set(array('faculties'=> $faculties));
+        }
+        
+        public function getFacNamebyID($facID)
+        {
+            $query = "SELECT name FROM faculties WHERE id = $facID";
+            
+            $facName = $this->Faculty->query($query);
+            return $facName[0]['faculties']['name'];
+        }
+        
+        public function getFacCodebyID($facID)
+        {
+            $query = "SELECT code FROM faculties WHERE id = $facID";
+            
+            $facCode = $this->Faculty->query($query);
+            return $facCode[0]['faculties']['code'];
+        }
+        
+}
