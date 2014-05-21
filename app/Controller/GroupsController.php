@@ -119,4 +119,12 @@ class GroupsController extends AppController {
             return $data[0]['groups']['name'];
             
         }
-                }
+        
+        public function countGroup()
+        {
+            $query = "SELECT DISTINCT COUNT(id) as groupCount FROM groups";
+            
+            $groupCount = $this->Group->query($query);
+            return $groupCount[0][0]['groupCount'];
+        }
+}

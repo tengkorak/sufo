@@ -104,4 +104,30 @@ class ProgramsController extends AppController {
 			$this->Session->setFlash(__('The program could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
-	}}
+	}
+        
+        public function countProgram()
+        {
+            $query = "SELECT DISTINCT COUNT(id) as prgrmCount FROM programs";
+            
+            $prgrmCount = $this->Program->query($query);
+            return $prgrmCount[0][0]['prgrmCount'];
+        }
+        
+        public function getProgramNamebyID($prgID)
+        {
+            $query = "SELECT name FROM programs WHERE id = $prgID";
+            
+            $prgrmName = $this->Program->query($query);
+            return $prgrmName[0]['programs']['name'];
+        }
+        
+        public function getProgramCodebyID($prgID)
+        {
+            $query = "SELECT code FROM programs WHERE id = $prgID";
+            
+            $prgrmCode = $this->Program->query($query);
+            return $prgrmCode[0]['programs']['code'];
+        }
+        
+}

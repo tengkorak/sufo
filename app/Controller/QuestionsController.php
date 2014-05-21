@@ -142,14 +142,15 @@ class QuestionsController extends AppController {
             return $qDesc;
         }
         
-        public function stdViewQuestions()
+        public function std_view_questions($cID = NULL, $grpID = NULL, $svyID = NULL)
         {
             $query = "SELECT id, ques
                         FROM questions";
             
             $questions = $this->Question->query($query);
             
-            //print_r($questions);
+            $svData = array('cID'=> $cID, 'grpID'=> $grpID, 'svyID'=> $svyID);
+            //debug($questions);
             $qA1 = array();
             $qA2 = array();
             for($i = 0; $i <= 26; $i++)
@@ -166,7 +167,7 @@ class QuestionsController extends AppController {
             }
             
             //print_r($qA2);
-            $this->set(array('qA1'=> $qA1, 'qA2'=> $qA2));
+            $this->set(array('qA1'=> $qA1, 'qA2'=> $qA2, 'svData'=> $svData));
             
         }
         

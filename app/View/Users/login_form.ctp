@@ -8,6 +8,6 @@
       <br/><br/>
       <input id="UserPswd" type="password" name="data[User][pswd]" placeholder="Password">
       <br/><br/>
-      <input type="submit" value="Login" class="btn btn-success"/>
+      <input type="submit" class="btn btn-success" value="Login" />
 
 </form>

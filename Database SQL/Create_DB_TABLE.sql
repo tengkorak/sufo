@@ -80,8 +80,8 @@ CREATE TABLE IF NOT EXISTS `courses_users` (
   PRIMARY KEY (`id`),
   KEY `fk_courses_users_users1_idx` (`user_id`),
   KEY `fk_courses_users_courses1_idx` (`course_id`),
-  CONSTRAINT `fk_courses_users_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `fk_courses_users_courses1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`)
+  CONSTRAINT `fk_courses_users_courses1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
+  CONSTRAINT `fk_courses_users_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
@@ -120,8 +120,8 @@ CREATE TABLE IF NOT EXISTS `groups_users` (
   PRIMARY KEY (`id`),
   KEY `fk_groups_users_users1_idx` (`user_id`),
   KEY `fk_groups_users_groups1_idx` (`group_id`),
-  CONSTRAINT `fk_groups_users_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `fk_groups_users_groups1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`)
+  CONSTRAINT `fk_groups_users_groups1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`),
+  CONSTRAINT `fk_groups_users_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
@@ -219,8 +219,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `USR_UID_UNIQUE` (`uid`),
   KEY `fk_USERS_FACULTY1_idx` (`faculty_id`),
   KEY `fk_users_campuses1_idx` (`campus_id`),
-  CONSTRAINT `fk_USERS_FACULTY1` FOREIGN KEY (`faculty_id`) REFERENCES `faculties` (`id`),
-  CONSTRAINT `fk_users_campuses1` FOREIGN KEY (`campus_id`) REFERENCES `campuses` (`id`)
+  CONSTRAINT `fk_users_campuses1` FOREIGN KEY (`campus_id`) REFERENCES `campuses` (`id`),
+  CONSTRAINT `fk_USERS_FACULTY1` FOREIGN KEY (`faculty_id`) REFERENCES `faculties` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.

@@ -141,7 +141,7 @@ class UsersController extends AppController {
                 }
                 else if($user['role'] == '3')
                 {
-                    //student redirect link
+                    $this->Redirect(array('controller' => 'surveys', 'action' => 'studindex'));
                 }
                 
                 exit();
@@ -381,6 +381,22 @@ class UsersController extends AppController {
         $lecturers = $this->User->query($lectQuery);
 
         $this->set(array('lecturers'=> $lecturers));
+    }
+    
+    public function countLecturer()
+    {
+        $query = "SELECT DISTINCT COUNT(id) AS lectCount FROM users WHERE role = 2";
+
+        $lectCount = $this->User->query($query);
+        return $lectCount[0][0]['lectCount'];
+    }
+    
+    public function countStudent()
+    {
+        $query = "SELECT DISTINCT COUNT(id) AS stdCount FROM users WHERE role = 3";
+
+        $stdCount = $this->User->query($query);
+        return $stdCount[0][0]['stdCount'];
     }
         
 }

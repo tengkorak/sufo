@@ -29,10 +29,11 @@
                 <tr>
                     <th> Course Group </th>
                     <th> Semesters </th>
-                    <th><center> A </center></th>
-                    <th><center> B </center></th>
-                    <th><center> C </center></th>
-                    <th><center> D </center></th>
+                    <th><center> Part A </center></th>
+                    <th><center> Part B </center></th>
+                    <th><center> Part C </center></th>
+                    <th><center> Part D </center></th>
+                    <th><center> Average </center></th>
                 </tr>
                 <?php foreach ($uiData as $data): ?>
                 <tr>
@@ -43,6 +44,7 @@
                     <td><center> <?php echo $data['avgPartB']; ?> </center></td>
                     <td><center> <?php echo $data['avgPartC']; ?> </center></td>
                     <td><center> <?php echo $data['avgPartD']; ?> </center></td>
+                    <td><center> <?php echo $data['overAllAvg']; ?> </center></td>
                 </tr>
 
                 <?php endforeach; ?>

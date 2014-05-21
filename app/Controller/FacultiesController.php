@@ -127,4 +127,12 @@ class FacultiesController extends AppController {
             return $facCode[0]['faculties']['code'];
         }
         
+        public function countFaculty()
+        {
+            $query = "SELECT DISTINCT COUNT(id) as facCount FROM faculties";
+            
+            $facCount = $this->Faculty->query($query);
+            return $facCount[0][0]['facCount'];
+        }
+        
 }

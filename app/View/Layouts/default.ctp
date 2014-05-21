@@ -16,7 +16,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'SuFo: Student Feedback Online');
+$cakeDescription = __d('cake_dev', 'SuFO: Student Feedback Online');
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,6 +39,7 @@ $cakeDescription = __d('cake_dev', 'SuFo: Student Feedback Online');
             
             echo $this->Html->script('bootstrap');
             echo $this->Html->script('bootstrap.min');
+            echo $this->Html->script('bootstrap-button');
             echo $this->Html->script('bootstrap-collapse');
 
             echo $this->fetch('meta');
@@ -47,11 +48,12 @@ $cakeDescription = __d('cake_dev', 'SuFo: Student Feedback Online');
 	?>
 </head>
 
-<body style ="background-color: #eee;">
+<body style="background-color: #eee;">
 
 	<div id="container">
 		<div id="header">
-			<h3><?php echo $cakeDescription; ?></h3>
+                        <?php //echo "<img src='img/uitm_logo.gif'/> <img src='img/ilearn_logo2.jpg'/>"; ?>
+                        <h4> <?php echo $cakeDescription; ?> </h4>
 		</div>
 		<div id="content">
 

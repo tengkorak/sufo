@@ -123,4 +123,12 @@ class CoursesController extends AppController {
             return $cCode." - ".$cName;
             
         }
+        
+        public function countCourse()
+        {
+            $query = "SELECT DISTINCT COUNT(id) as courseCount FROM courses";
+            
+            $courseCount = $this->Course->query($query);
+            return $courseCount[0][0]['courseCount'];
+        }
  }
